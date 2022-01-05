@@ -57,7 +57,7 @@ class LoginController extends Controller
             }
             return response()->json(['message' => 'Not successfuly login']);
         }
-        return response()->json(['message' => 'You can not login by user]);
+        return response()->json(['message' => 'You can not login by user']);
        
     }
 
