@@ -13,12 +13,11 @@ class AdminloginController extends Controller
 
     public function index()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
     {
-
         $request->validate([
             'user_name' => 'required',
             'password' => 'required',

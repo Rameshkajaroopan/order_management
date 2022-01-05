@@ -9,8 +9,8 @@ use Illuminate\Support\Carbon;
 // Route::get('/mobileLogin',  'App\Http\Controllers\mobile\loginController@index');
 
 // login for web
-Route::get('/login',  'App\Http\Controllers\AdminloginController@index');
-Route::get('/adminlogin',  'App\Http\Controllers\AdminloginController@login');
+Route::get('/',  'App\Http\Controllers\AdminloginController@index');
+Route::post('/adminlogin',  'App\Http\Controllers\AdminloginController@login');
 Route::get('/adminlogout',  'App\Http\Controllers\AdminloginController@logout');
 
 Route::group(['middleware' => ['is_admin']], function () {
@@ -52,3 +52,7 @@ Route::get('/pendingOrder',  'App\Http\Controllers\OrderController@pendingOrder'
 
 // Route::get('/hi/dashboard',  'App\Http\Controllers\mobile\DashboardController@dashboard');
 // Route::get('/hi/createLogin',  'App\Http\Controllers\mobile\LoginController@createLogin');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();

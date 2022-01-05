@@ -40,22 +40,25 @@ class LoginController extends Controller
 
 
         $request->validate([
-            'user_name' => 'required',
+            'c' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('user_name', 'password');
+        if (User::where('user_name', $request->user_name)->value('role') != 'admin') {
+            $credentials = $request->only('user_name', 'password');
 
-        if (Auth::attempt($credentials)) {
+            if (Auth::attempt($credentials)) {
 
-            /** @var \App\Models\MyUserModel $user **/
-            $user = Auth::user();
-            $token  = $user->createToken('tokens')->plainTextToken;
-            return response()->json(['token' => $token]);
-            return redirect('/api/dashboard');
+                /** @var \App\Models\MyUserModel $user **/
+                $user = Auth::user();
+                $token  = $user->createToken('tokens')->plainTextToken;
+                return response()->json(['token' => $token]);
+                // return redirect('/api/dashboard');
+            }
+            return response()->json(['message' => 'Not successfuly login']);
         }
-
-        return response()->json(['message' => 'not successfuly login']);
+        return response()->json(['message' => 'You can not login by user]);
+       
     }
 
     public function logout()
