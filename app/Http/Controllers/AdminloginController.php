@@ -50,7 +50,7 @@ class AdminloginController extends Controller
 
     public function dashboard()
     {
-        return  Auth::user()->email;
-        return view('dashboard');
+   
+        return view('layouts.app');
     }
 }
