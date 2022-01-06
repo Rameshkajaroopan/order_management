@@ -51,6 +51,6 @@ class AdminloginController extends Controller
     public function dashboard()
     {
    
-        return view('layouts.app');
+        return view('home');
     }
 }
