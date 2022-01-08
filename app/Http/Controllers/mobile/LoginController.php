@@ -14,21 +14,10 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function sendResponse($result, $message)
-    {
-        $response = [
-            'success' => true,
-            'data'    => $result,
-            'message' => $message,
-        ];
-
-
-        return response()->json($response, 200);
-    }
 
     public function index()
     {
-        return response()->json(['message' => 'login panunga']);
+        return response()->json(['message' => 'login page']);
     }
     /**
      * Display a listing of the resource.
@@ -38,27 +27,22 @@ class LoginController extends Controller
     public function createLogin(Request $request)
     {
 
-
-        $request->validate([
-            'c' => 'required',
-            'password' => 'required',
-        ]);
-
         if (User::where('user_name', $request->user_name)->value('role') != 'admin') {
             $credentials = $request->only('user_name', 'password');
 
             if (Auth::attempt($credentials)) {
-
                 /** @var \App\Models\MyUserModel $user **/
                 $user = Auth::user();
                 $token  = $user->createToken('tokens')->plainTextToken;
+
+                DB::table('users')
+                    ->where('id', Auth::user()->id)
+                    ->update(['remember_token' =>  $token]);
                 return response()->json(['token' => $token]);
-                // return redirect('/api/dashboard');
             }
             return response()->json(['message' => 'Not successfuly login']);
         }
         return response()->json(['message' => 'You can not login by user']);
-       
     }
 
     public function logout()

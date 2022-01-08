@@ -18,13 +18,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="/pendingOrder" class="nav-link">
                   <i class="far fa-clock nav-icon"></i>
                   <p>Pending Orders</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/validation.html" class="nav-link">
+                <a href="/completedOrder" class="nav-link">
                   <i class="far fa-check-square nav-icon"></i>
                   <p>Complete Orders</p>
                 </a>

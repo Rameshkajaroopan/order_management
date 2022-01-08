@@ -21,9 +21,7 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             UserSeeder::class,
             OrderSeeder::class,
-            OrderTransferSeeder::class
-
-            
+            OrderTransferSeeder::class 
 
         ]);
     }

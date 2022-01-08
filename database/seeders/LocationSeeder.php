@@ -16,29 +16,18 @@ class LocationSeeder extends Seeder
     public function run()
     {
         DB::table('locations')->insert([  
-            'name' =>Str::random(8), 
+            'name' =>'location1', 
             'branch_id' => 1, 
         ]);
  
         DB::table('locations')->insert([
-            'name' =>Str::random(8), 
+            'name' =>'location2', 
             'branch_id' => 2,
         ]);
  
         DB::table('locations')->insert([
-            'name' =>Str::random(8), 
+            'name' =>'location3', 
             'branch_id' => 3,
         ]);
- 
-        DB::table('locations')->insert([
-            'name' =>Str::random(8), 
-            'branch_id' => 4,
-        ]);
- 
-        DB::table('locations')->insert([
-            'name' =>Str::random(8), 
-            'branch_id' => 5,
-        ]);
- 
     }
 }

@@ -27,7 +27,7 @@ class AdminloginController extends Controller
         if (Auth::attempt($credentials)) {
 
             $token = Str::random(64);
-            $name  =  Auth::user()->first_name;
+           
             DB::table('users')
                 ->where('id', Auth::user()->id)
                 ->update(['remember_token' =>  $token]);

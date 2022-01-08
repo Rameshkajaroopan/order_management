@@ -19,9 +19,9 @@ class IsAdmin
     {
              
         if($request->user() && $request->user()->role == 'admin'){
-            //  return redirect('/hi');
+        
              return $next($request);   
         }
-        return redirect('/bye');
+        return redirect('/');
     }
 }

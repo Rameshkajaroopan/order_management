@@ -30,18 +30,7 @@ class branchSeeder extends Seeder
             'location' =>Str::random(10), 
         ]);
 
-        DB::table('branches')->insert([
-            'name' => 'D',
-            'location' =>Str::random(10), 
-        ]);
-
-        DB::table('branches')->insert([
-            'name' => 'E',
-            'location' =>Str::random(10), 
-        ]);
-
-        
-
+      
  
     }
 }

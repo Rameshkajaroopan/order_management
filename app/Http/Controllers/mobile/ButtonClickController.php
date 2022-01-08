@@ -17,8 +17,9 @@ class ButtonClickController extends Controller
 {
     public function sendRequest(Request $request)
     {
+        $order_id = Order::where('serial_number', $request->serial_number)->value('id');
         $OrderTransfer =   new OrderTransfer;
-        $OrderTransfer->order_id =  $request->serial_number;
+        $OrderTransfer->order_id =   $order_id;
         $OrderTransfer->requested_branch_id = Auth::user()->branch_id;
         $OrderTransfer->approved_branch_id  = $request->approved_branch_id;
         $OrderTransfer->requested_date = Carbon::now();

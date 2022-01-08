@@ -8,40 +8,108 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Order;
 use App\Models\Branch;
 use App\Models\User;
+use App\Models\Location;
+use StdClass;
 
 class OrderController extends Controller
 {
-    public function completedOrder()
+    public function completedOrder(Request $request)
     {
-        $completedOrders = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+        $branch_status = $request->branch_status;
+
+        $completedOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->join('users', 'orders.created_user_id', '=', 'users.id')
-            ->join('branch', 'orders.created_branch_id', '=', 'branch.id')
-            ->where('orders.working_status', '=', 'completed')
+            ->join('branches', 'orders.created_branch_id', '=', 'branches.id')
+            ->where('orders.working_status', '=', 'Completed')
+            ->orderBy('orders.id');
+
+        if ($branch_status != "") {
+            $completedOrders =   $completedOrders->where('orders.created_branch_id', '=', $branch_status);
+        }
+
+        $completedOrders =  $completedOrders->orderBy('orders.id', 'desc')
+            ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
             ->get();
 
         $branches =  Branch::get();
+
         $users = User::get();
+        $locations = Location::get();
 
         return view('order.completedOrder')
-            ->with('completedOrders', $completedOrders)
+            ->with('pendingOrders', $completedOrders)
             ->with('branches', $branches)
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('locations', $locations)
+            ->with('branch_status', $branch_status);
+           
     }
 
-    public function pendingOrder()
+    public function pendingOrder(Request $request)
     {
-        $pendingOrders = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+
+        $branch_status = $request->branch_status;
+        $location_status = $request->location_status;
+
+        $pendingOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->join('users', 'orders.created_user_id', '=', 'users.id')
-            ->join('branch', 'orders.created_branch_id', '=', 'branch.id')
-            ->where('orders.working_status', '!=', 'completed')
+            ->join('branches', 'orders.created_branch_id', '=', 'branches.id')
+            ->where('orders.working_status', '!=', 'Completed')
+            ->orderBy('orders.id');
+
+        if ($branch_status != "") {
+
+            $pendingOrders =   $pendingOrders->where('orders.created_branch_id', '=', $branch_status);
+        }
+        if ($location_status != "") {
+
+            $pendingOrders =   $pendingOrders->where('orders.working_status', '=', $location_status);
+        }
+
+        $pendingOrders =  $pendingOrders->orderBy('orders.id', 'desc')
+            ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
             ->get();
 
         $branches =  Branch::get();
+
         $users = User::get();
+        $locations = Location::get();
 
         return view('order.pendingOrder')
-        ->with('completedOrders', $pendingOrders)
-        ->with('branches', $branches)
-        ->with('users', $users);
+            ->with('pendingOrders', $pendingOrders)
+            ->with('branches', $branches)
+            ->with('users', $users)
+            ->with('locations', $locations)
+            ->with('branch_status', $branch_status)
+            ->with('location_status', $location_status);
+    }
+
+    public function viewOrder(Request $request)
+    {
+
+        $order_id = $request->order_id;
+
+        $viewOrder = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+            ->where('orders.id', $order_id)
+            ->select('orders.id as Oid', 'orders.*', 'order_transfers.*')
+            ->first();
+
+        $created_branch_name =  Branch::where('id',  $viewOrder->created_branch_id)->value('name');
+        $requested_branch_name =  Branch::where('id',  $viewOrder->requested_branch_id)->value('name');
+        $approved_branch_name =  Branch::where('id',  $viewOrder->approved_branch_id)->value('name');
+
+        $created_user_name =  User::where('id',  $viewOrder->created_user_id)->value('first_name');
+        $requested_user_name =  User::where('id',  $viewOrder->requested_user_id)->value('first_name');
+        $approved_user_name =  User::where('id',  $viewOrder->approved_user_id)->value('first_name');
+
+
+        $viewOrder->created_branch_name = $created_branch_name;
+        $viewOrder->requested_branch_name = $requested_branch_name;
+        $viewOrder->approved_branch_name = $approved_branch_name;
+        $viewOrder->created_user_name = $created_user_name;
+        $viewOrder->requested_user_name = $requested_user_name;
+        $viewOrder->approved_user_name = $approved_user_name;
+
+        return json_encode($viewOrder);
     }
 }

@@ -5,13 +5,15 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
 
 
-
+Route::get('/test' , function(){
+return view('test');
+});
 // Route::get('/mobileLogin',  'App\Http\Controllers\mobile\loginController@index');
 
 // login for web
 Route::get('/',  'App\Http\Controllers\AdminloginController@index');
 Route::post('/adminlogin',  'App\Http\Controllers\AdminloginController@login');
-Route::get('/adminlogout',  'App\Http\Controllers\AdminloginController@logout');
+Route::get('/adminlogout',  'App\Http\Controllers\AdminloginController@logout')->name('logout');
 
 Route::group(['middleware' => ['is_admin']], function () {
 
@@ -41,18 +43,15 @@ Route::post('/location',  'App\Http\Controllers\LocationController@store')->name
 Route::get('/location/{id}/edit',  'App\Http\Controllers\LocationController@edit')->name('location.edit');
 Route::post('/location/{id}/update',  'App\Http\Controllers\LocationController@update')->name('location.update');
 Route::get('/location/{id}/delete',  'App\Http\Controllers\LocationController@destroy')->name('location.destroy');
-
 // get completed orders
 Route::get('/completedOrder',  'App\Http\Controllers\OrderController@completedOrder')->name('order.completedOrder');
 // get pending orders
 Route::get('/pendingOrder',  'App\Http\Controllers\OrderController@pendingOrder')->name('order.pendingOrder');
-
-
+Route::get('/viewOrder',  'App\Http\Controllers\OrderController@viewOrder')->name('order.viewOrder');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
-// Route::get('/hi/dashboard',  'App\Http\Controllers\mobile\DashboardController@dashboard');
-// Route::get('/hi/createLogin',  'App\Http\Controllers\mobile\LoginController@createLogin');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+
+

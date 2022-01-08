@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             'role' =>'admin',
             'mobile' =>Str::random(10),
             'email' => 'nilavan@gmail.com',
-            'branch_id' => 4,
+            'branch_id' => 1,
             'user_name' => 'nilavan',
             'password' => Hash::make('password'),
         ]);
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             'role' =>'admin',
             'mobile' =>Str::random(10),
             'email' => 'mayuran@gmail.com',
-            'branch_id' => 4,
+            'branch_id' => 2,
             'user_name' => 'mayuran',
             'password' => Hash::make('password'),
         ]);
@@ -71,10 +71,9 @@ class UserSeeder extends Seeder
             'role' =>'admin',
             'mobile' =>Str::random(10),
             'email' => 'kajan@gmail.com',
-            'branch_id' => 2,
+            'branch_id' => 3,
             'user_name' => 'kajan',
             'password' => Hash::make('password'),
         ]);
-
     }
 }

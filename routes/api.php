@@ -41,15 +41,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/receivedNotCompletedOrder',  'App\Http\Controllers\mobile\OrderController@receivedNotCompletedOrder');
     Route::get('/receivedCompletedOrder',  'App\Http\Controllers\mobile\OrderController@receivedCompletedOrder');
     Route::get('/stuckOrder',  'App\Http\Controllers\mobile\OrderController@stuckOrder');
-    Route::get('/createdOrder',  'App\Http\Controllers\mobile\OrderController@createdOrder');
+    Route::post('/createdOrder',  'App\Http\Controllers\mobile\OrderController@createdOrder');
 
     Route::get('/singleOrder',  'App\Http\Controllers\mobile\SingleOrderController@singleOrder');
 
-    Route::get('/sendRequest',  'App\Http\Controllers\mobile\ButtonClickController@sendRequest');
-    Route::get('/deliverSameBranch',  'App\Http\Controllers\mobile\ButtonClickController@deliverSameBranch');
-    Route::get('/approved',  'App\Http\Controllers\mobile\ButtonClickController@approved');
-    Route::get('/changeLocation',  'App\Http\Controllers\mobile\ButtonClickController@changeLocation');
-    Route::get('/stuckOrderRequest',  'App\Http\Controllers\mobile\ButtonClickController@stuckOrderRequest');
+    Route::post('/sendRequest',  'App\Http\Controllers\mobile\ButtonClickController@sendRequest');
+    Route::post('/deliverSameBranch',  'App\Http\Controllers\mobile\ButtonClickController@deliverSameBranch');
+    Route::post('/approved',  'App\Http\Controllers\mobile\ButtonClickController@approved');
+    Route::post('/changeLocation',  'App\Http\Controllers\mobile\ButtonClickController@changeLocation');
+    Route::post('/stuckOrderRequest',  'App\Http\Controllers\mobile\ButtonClickController@stuckOrderRequest');
 
     Route::get('/logout',  'App\Http\Controllers\mobile\LoginController@logout');
 });
