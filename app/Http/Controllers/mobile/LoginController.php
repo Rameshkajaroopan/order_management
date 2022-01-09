@@ -27,7 +27,7 @@ class LoginController extends Controller
     public function createLogin(Request $request)
     {
 
-        if (User::where('user_name', $request->user_name)->value('role') != 'admin') {
+        // if (User::where('user_name', $request->user_name)->value('role') != 'admin') {
             $credentials = $request->only('user_name', 'password');
 
             if (Auth::attempt($credentials)) {
@@ -41,8 +41,8 @@ class LoginController extends Controller
                 return response()->json(['token' => $token]);
             }
             return response()->json(['message' => 'Not successfuly login']);
-        }
-        return response()->json(['message' => 'You can not login by user']);
+        // }
+        // return response()->json(['message' => 'You can not login by user']);
     }
 
     public function logout()
