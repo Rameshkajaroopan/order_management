@@ -31,9 +31,9 @@ class LoginController extends Controller
             $credentials = $request->only('user_name', 'password');
 
             if (Auth::attempt($credentials)) {
-                // /** @var \App\Models\MyUserModel $user **/
-                // $user = Auth::user();
-                $token  = Auth::user()->createToken('tokens')->plainTextToken;
+                /** @var \App\Models\MyUserModel $user **/
+                $user = Auth::user();
+                $token  = $user->createToken('tokens')->plainTextToken;
 
                 DB::table('users')
                     ->where('id', Auth::user()->id)
