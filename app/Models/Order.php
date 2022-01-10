@@ -39,4 +39,7 @@ class Order extends Model
 
         return $this->hasMany(OrderTransfer::class);
     }
+    public function branch() {
+        return $this->belongsTo(Branch::class,'created_branch_id', 'id');
+    }
 }

@@ -7,36 +7,44 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\User;
 
 class AdminloginController extends Controller
 {
 
     public function index()
     {
+       
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
+
         $request->validate([
             'user_name' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('user_name', 'password');
-        if (Auth::attempt($credentials)) {
-
-            $token = Str::random(64);
-           
-            DB::table('users')
-                ->where('id', Auth::user()->id)
-                ->update(['remember_token' =>  $token]);
-            
-            return redirect('/dashboard')->with('message', 'Your successfully login !');
+        $user = User::where('user_name', $request->user_name)
+            ->where('password', $request->password)
+            ->first();
+        if (!isset($user)) {
+            return redirect('/')->with('message', 'Your email and password does not match !');
         }
-     
-        return redirect('/login')->with('message', 'Your email and password does not match !');
+
+        Auth::login($user);
+
+        $token = Str::random(64);
+
+        DB::table('users')
+            ->where('id', Auth::user()->id)
+            ->update(['remember_token' =>  $token]);
+
+        return redirect('/home')->with('message', 'Your successfully login !');
     }
+
+
 
     public function logout()
     {
@@ -45,12 +53,12 @@ class AdminloginController extends Controller
 
         Auth::logout();
 
-        return Redirect('/login');
+        return Redirect('/');
     }
 
     public function dashboard()
     {
-   
+
         return view('home');
     }
 }

@@ -15,17 +15,17 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition dark-mode login-page ">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        <a><img src="{{ asset('logo.png')}}"></a>
     </div>
     <!-- /.login-logo -->
 
     <!-- /.login-box-body -->
-    <div class="card">
-        <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+    <div class="card rounded " >
+        <div class="card-body login-card-body" style="border-radius:30px">
+            <p class="login-box-msg">Sign in to Go to the Admin pannel</p>
 
             <form method="post" action="{{ url('/adminlogin') }}">
                 @csrf

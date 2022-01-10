@@ -17,6 +17,8 @@
             }
         });
     </script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @yield('third_party_stylesheets')
 
     @stack('page_css')
@@ -57,7 +59,6 @@
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
                             <a href="#" class="btn btn-default btn-flat float-right" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Sign out
                             </a>

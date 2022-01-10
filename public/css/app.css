@@ -6105,7 +6105,7 @@ a.disabled.mailbox-attachment-close {
     background-color: #fff;
     background-clip: padding-box;
     border: 5px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.3rem;
+    border-radius: 1rem;
     box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
     outline: 0;
 }

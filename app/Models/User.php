@@ -44,11 +44,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
-    
+    public function branch() {
+        return $this->belongsTo(Branch::class);
+    }
     /**
      * The attributes that should be cast.
      *

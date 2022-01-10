@@ -19,6 +19,9 @@ class LoginController extends Controller
     {
         return response()->json(['message' => 'login page']);
     }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -55,3 +58,4 @@ class LoginController extends Controller
         return response()->json(['message' => 'Your successfully logout']);
     }
 }
+
