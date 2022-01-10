@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -44,6 +45,7 @@
                         <th width="100px">mobile</th>
                         <th width="100px">Created Branch</th>
                         <th width="100px">Paid Amount</th>
+                        <th width="100px">Change status</th>
                         <th width="100px">Actions</th>
                     </tr>
                     @foreach($pendingOrders as $pendingOrder)
@@ -53,12 +55,18 @@
                         <td>{{$pendingOrder->mobile}}</td>
                         <td>{{$pendingOrder->branchName}}</td>
                         <td>{{$pendingOrder->paid_amount}}</td>
-                        <td><button  type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}" >View</button>
+                        <td><select data-id="{{$pendingOrder->Oid}}" id="working_status" class=" browser-default form-control working_status">
+                                <option value="NotStart" {{$pendingOrder->working_status == "NotStart" ? 'selected':''}}>Not Start</option>
+                                <option value="InProgress" {{$pendingOrder->working_status == "InProgress" ? 'selected':''}}>In Progress</option>
+                                <option value="Stuck" {{$pendingOrder->working_status == "Stuck" ? 'selected':''}}>Stuck</option>
+                                <option value="Completed" {{$pendingOrder->working_status== "Completed" ? 'selected':''}}>Completed</option>
+                            </select>
+                        </td>
+                        <td><button type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}">View</button>
                         </td>
                     </tr>
                     @endforeach
                 </table>
-
             </div>
         </div>
     </div>
@@ -96,9 +104,9 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label> Created  User</label>
+                                <label> Created User</label>
                                 <div class="form-group">
-                                    <input id="created_user_name"  type="text" class="form-control modelView" value="" disabled />
+                                    <input id="created_user_name" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
@@ -201,10 +209,11 @@
 </div>
 <script>
     $(document).ready(function() {
-    
+        console.log('hi');
+
         $(".view_button").click(function() {
-           
-            order_id =  $(this).attr('data_id');
+
+            order_id = $(this).attr('data_id');
             $.ajax({
                 method: "get",
                 url: "/viewOrder",
@@ -231,6 +240,48 @@
                     $('#viewModal').modal('show')
                 }
             });
+        });
+
+        $(".working_status").on('change', function() {
+
+            var order_id = $(this).attr('data-id');
+            var working_status = $(this).val();
+            console.log(order_id);
+            if (working_status == "Completed") {
+                var result = confirm("Do you want to change status to complited");
+
+                if (result) {
+                    $.ajax({
+                        method: "get",
+                        url: "/changeWorking",
+                        data: {
+                            order_id: order_id,
+                            working_status: working_status,
+                        },
+                        success: function(result) {
+                            console.log(result);
+                            location.reload();
+                        }
+
+                    });
+                } else {
+                    location.reload();
+                }
+            } else {
+                $.ajax({
+                    method: "get",
+                    url: "/changeWorking",
+                    data: {
+                        order_id: order_id,
+                        working_status: working_status,
+                    },
+                    success: function(result) {
+                        console.log(result);
+                        location.reload();
+                    }
+
+                });
+            }
         });
     });
 </script>

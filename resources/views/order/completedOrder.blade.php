@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
+<!-- <div class="row">
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
@@ -21,8 +21,54 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+             <div class="card-body">
+
+            <form action="/completedOrder" method="GET" class="row m-0">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <strong>From</strong>
+                        <input type="date" name="from" id="from" value="{{$from}}" class="form-control" required >
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <strong>To</strong>
+                        <input type="date" name="to" id="to" value="{{$to}}" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group ">
+                    <strong>Created Branch</strong>
+                        <select id="branch_status"  name="branch_status"  class=" browser-default form-control" >
+                            <option value="" {{$branch_status == "" ? 'selected':''}}>All</option>
+                            @foreach($branches as $branch )
+                            <option value="{{$branch->id}}" {{$branch_status == "$branch->id" ? 'selected':''}}>{{$branch->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <div class="form-group ">
+                        <br>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
 </div>
 
+
+    </div>
+</div>
 
 <div class="row">
     <div class="col-sm-12">
