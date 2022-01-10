@@ -22,10 +22,11 @@ Route::get('/dashboard',  'App\Http\Controllers\AdminloginController@dashboard')
 
 // user crud function
 Route::get('/user',  'App\Http\Controllers\UserController@index')->name('user.index');
+Route::get('/viewUser',  'App\Http\Controllers\UserController@userView')->name('user.view');
 Route::get('/user/add',  'App\Http\Controllers\UserController@create')->name('user.create');
 Route::post('/user',  'App\Http\Controllers\UserController@store')->name('user.store');
 Route::get('/user/{id}/edit',  'App\Http\Controllers\UserController@edit')->name('user.edit');
-Route::post('/user/{id}/update',  'App\Http\Controllers\UserController@update')->name('user.update');
+Route::post('/user/update',  'App\Http\Controllers\UserController@update')->name('user.update');
 Route::get('/user/{id}/delete',  'App\Http\Controllers\UserController@destroy')->name('user.destroy');
 
 // branch crud function

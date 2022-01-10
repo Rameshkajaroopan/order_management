@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Branch;
+
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request )
     {
-        return Auth::user()->id;
+        $branch_status = $request->branch_status;
         $users = User::get();
-       
-        return view('user.index')->with('users',$users);
+       $branches = Branch::all();
+        return view('user.index')->with('users',$users)->with('branches',$branches);
     }
 
     public function create()
@@ -60,21 +62,13 @@ class UserController extends Controller
         return view('user.edit')->with('user', $user);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
+        dd($request);
         
-        $request->validate([
-            'first_name' => 'required',
-            'email' => 'required',
-            'mobile' => 'required|digits:10',
-            'password' => 'required',
-            'role' => 'required',
-            'address' => 'required',
-            'branch_id' => 'required'
-        ]);
 
 
-        $users = User::find($id);
+        $users = User::find($request->id);
 
         $users->first_name = $request->input('first_name');
         $users->last_name = $request->input('last_name');
@@ -96,5 +90,12 @@ class UserController extends Controller
             return redirect('/user');
             
 
+    }
+
+    public function userView(Request $request){
+        $user = User::find($request->id);
+        return json_encode($user);
+
+        
     }
 }

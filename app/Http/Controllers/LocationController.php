@@ -25,7 +25,7 @@ class LocationController extends Controller
     {
         $request->validate([
             'name' => 'required',
-           
+            'branch_id' => 'required',
         ]);
 
         $locations = new Location;

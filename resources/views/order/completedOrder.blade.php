@@ -1,6 +1,124 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+
+.rwd-table {
+    margin: auto;
+    min-width: 300px;
+    max-width: 100%;
+    border-collapse: collapse;
+  }
+
+  .custom-txt-right{
+      text-align: right !important;
+  }
+  
+  .rwd-table tr:first-child {
+    border-top: none;
+    color: #495057;
+    
+  }
+
+  .rwd-table td{
+    border-top: 0 !important;
+
+  }
+  
+  .rwd-table th {
+    display: none;
+  }
+  
+  .rwd-table td {
+    display: block;
+  }
+  
+  .rwd-table td:first-child {
+    margin-top: .5em;
+  }
+  
+  .rwd-table td:last-child {
+    margin-bottom: .5em;
+  }
+  
+  .rwd-table td:before {
+    content: attr(data-th) "";
+    font-weight: bold;
+    width: 120px;
+    display: inline-block;
+    color: #495057;
+  }
+
+  
+  .rwd-table th,
+  .rwd-table td {
+    text-align: left;
+  }
+  
+  .rwd-table {
+    color: #333;
+    border-radius: .4em;
+    overflow: hidden;
+  }
+  
+  .rwd-table tr {
+    border-color: #bfbfbf;
+  }
+  
+  .rwd-table th,
+  .rwd-table td {
+    padding: .5em 1em;
+  }
+  @media screen and (max-width: 601px) {
+    .rwd-table tr:nth-child(2) {
+      border-top: none;
+    }
+
+    .rwd-table td:nth-of-type(1){
+        background-color:#495057 ;
+        color:white;
+        display: grid;
+    }
+
+    .rwd-table td:nth-of-type(1):before { content: "" !important;}
+
+    .custom-txt-right{
+        text-align: left !important;
+    }
+    
+
+   
+  }
+  @media screen and (min-width: 600px) {
+    .rwd-table tr:hover:not(:first-child) {
+      background-color: #d8e7f3;
+    }
+    .rwd-table td:before {
+      display: none;
+    }
+    .rwd-table th,
+    .rwd-table td {
+      display: table-cell;
+      padding: .25em .5em;
+    }
+    .rwd-table th:first-child,
+    .rwd-table td:first-child {
+      padding-left: 0;
+    }
+    .rwd-table th:last-child,
+    .rwd-table td:last-child {
+      padding-right: 0;
+    }
+    .rwd-table th,
+    .rwd-table td {
+      padding: 1em !important;
+    }
+
+
+}
+
+</style>
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -8,7 +126,7 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <strong>Created Branch</strong>
-                        <select id="branch_status" class=" browser-default form-control" onchange="window.location.assign('/pendingOrder?branch_status=' + $('#branch_status').val() + '&&location_status=' + $('#location_status').val())">
+                        <select id="branch_status" class=" browser-default form-control" onchange="window.location.assign('/completedOrder?branch_status=' + $('#branch_status').val())">
                             <option value="" {{$branch_status == "" ? 'selected':''}}>All</option>
                             @foreach($branches as $branch )
                             <option value="{{$branch->id}}" {{$branch_status == "$branch->id" ? 'selected':''}}>{{$branch->name}}</option>
@@ -29,23 +147,23 @@
         <div class="card">
             <div class="card-body">
 
-                <table id="zero_config" class="table table-striped table-bordered no-wrap fixed">
+                <table id="zero_config" class="table rwd-table table table-striped table table-hover table table-striped table-bordered no-wrap fixed table table-striped table-bordered no-wrap fixed">
                     <tr>
-                        <th width="100px">Order</th>
-                        <th width="100px">Customer</th>
-                        <th width="100px">mobile</th>
-                        <th width="100px">Created Branch</th>
-                        <th width="100px">Paid Amount</th>
-                        <th width="100px">Actions</th>
+                        <th >Order</th>
+                        <th >Customer</th>
+                        <th >mobile</th>
+                        <th >Created Branch</th>
+                        <th >Paid Amount</th>
+                        <th >Actions</th>
                     </tr>
                     @foreach($pendingOrders as $pendingOrder)
                     <tr>
-                        <td>{{$pendingOrder->serial_number}}</td>
-                        <td>{{$pendingOrder->customer_name}}</td>
-                        <td>{{$pendingOrder->mobile}}</td>
-                        <td>{{$pendingOrder->branchName}}</td>
-                        <td>{{$pendingOrder->paid_amount}}</td>
-                        <td><button  type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}" >View</button>
+                    <td data-th="Order">{{$pendingOrder->serial_number}}</td>
+                        <td data-th="Customer">{{$pendingOrder->customer_name}}</td>
+                        <td data-th="mobile">{{$pendingOrder->mobile}}</td>
+                        <td data-th="Created Branch">{{$pendingOrder->branchName}}</td>
+                        <td data-th="Paid Amount">{{$pendingOrder->paid_amount}}</td>
+                        <td data-th="Actions"><button  type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->id}}" >View</button>
                         </td>
                     </tr>
                     @endforeach

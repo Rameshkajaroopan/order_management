@@ -55,3 +55,4 @@ class LoginController extends Controller
         return response()->json(['message' => 'Your successfully logout']);
     }
 }
+
