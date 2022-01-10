@@ -3,121 +3,128 @@
 @section('content')
 
 <style>
-
-.rwd-table {
-    margin: auto;
-    min-width: 300px;
-    max-width: 100%;
-    border-collapse: collapse;
-  }
-
-  .custom-txt-right{
-      text-align: right !important;
-  }
-  
-  .rwd-table tr:first-child {
-    border-top: none;
-    color: #495057;
-    
-  }
-
-  .rwd-table td{
-    border-top: 0 !important;
-
-  }
-  
-  .rwd-table th {
-    display: none;
-  }
-  
-  .rwd-table td {
-    display: block;
-  }
-  
-  .rwd-table td:first-child {
-    margin-top: .5em;
-  }
-  
-  .rwd-table td:last-child {
-    margin-bottom: .5em;
-  }
-  
-  .rwd-table td:before {
-    content: attr(data-th) "";
-    font-weight: bold;
-    width: 120px;
-    display: inline-block;
-    color: #495057;
-  }
-
-  
-  .rwd-table th,
-  .rwd-table td {
-    text-align: left;
-  }
-  
-  .rwd-table {
-    color: #333;
-    border-radius: .4em;
-    overflow: hidden;
-  }
-  
-  .rwd-table tr {
-    border-color: #bfbfbf;
-  }
-  
-  .rwd-table th,
-  .rwd-table td {
-    padding: .5em 1em;
-  }
-  @media screen and (max-width: 601px) {
-    .rwd-table tr:nth-child(2) {
-      border-top: none;
+    .rwd-table {
+        margin: auto;
+        min-width: 300px;
+        max-width: 100%;
+        border-collapse: collapse;
     }
 
-    .rwd-table td:nth-of-type(1){
-        background-color:#495057 ;
-        color:white;
-        display: grid;
+    .custom-txt-right {
+        text-align: right !important;
     }
 
-    .rwd-table td:nth-of-type(1):before { content: "" !important;}
+    .rwd-table tr:first-child {
+        border-top: none;
+        color: #495057;
 
-    .custom-txt-right{
-        text-align: left !important;
     }
-    
 
-   
-  }
-  @media screen and (min-width: 600px) {
-    .rwd-table tr:hover:not(:first-child) {
-      background-color: #d8e7f3;
-    }
-    .rwd-table td:before {
-      display: none;
-    }
-    .rwd-table th,
     .rwd-table td {
-      display: table-cell;
-      padding: .25em .5em;
+        border-top: 0 !important;
+
     }
-    .rwd-table th:first-child,
+
+    .rwd-table th {
+        display: none;
+    }
+
+    .rwd-table td {
+        display: block;
+    }
+
     .rwd-table td:first-child {
-      padding-left: 0;
+        margin-top: .5em;
     }
-    .rwd-table th:last-child,
+
     .rwd-table td:last-child {
-      padding-right: 0;
+        margin-bottom: .5em;
     }
+
+    .rwd-table td:before {
+        content: attr(data-th) "";
+        font-weight: bold;
+        width: 120px;
+        display: inline-block;
+        color: #495057;
+    }
+
+
     .rwd-table th,
     .rwd-table td {
-      padding: 1em !important;
+        text-align: left;
     }
 
+    .rwd-table {
+        color: #333;
+        border-radius: .4em;
+        overflow: hidden;
+    }
 
-  }
-  
+    .rwd-table tr {
+        border-color: #bfbfbf;
+    }
+
+    .rwd-table th,
+    .rwd-table td {
+        padding: .5em 1em;
+    }
+
+    @media screen and (max-width: 601px) {
+        .rwd-table tr:nth-child(2) {
+            border-top: none;
+        }
+
+        .rwd-table td:nth-of-type(1) {
+            background-color: #495057;
+            color: white;
+            display: grid;
+        }
+
+        .rwd-table td:nth-of-type(1):before {
+            content: "" !important;
+        }
+
+        .custom-txt-right {
+            text-align: left !important;
+        }
+
+
+
+    }
+
+    @media screen and (min-width: 600px) {
+        .rwd-table tr:hover:not(:first-child) {
+            background-color: #d8e7f3;
+        }
+
+        .rwd-table td:before {
+            display: none;
+        }
+
+        .rwd-table th,
+        .rwd-table td {
+            display: table-cell;
+            padding: .25em .5em;
+        }
+
+        .rwd-table th:first-child,
+        .rwd-table td:first-child {
+            padding-left: 0;
+        }
+
+        .rwd-table th:last-child,
+        .rwd-table td:last-child {
+            padding-right: 0;
+        }
+
+        .rwd-table th,
+        .rwd-table td {
+            padding: 1em !important;
+        }
+
+
+    }
 </style>
 <div class="row">
     <div class="col-sm-12">
@@ -162,6 +169,7 @@
                         <th class="">mobile</th>
                         <th class="">Created Branch</th>
                         <th class="">Paid Amount</th>
+                        <th class="">Change Status</th>
                         <th class="">Actions</th>
                     </tr>
                     @foreach($pendingOrders as $pendingOrder)
@@ -171,7 +179,14 @@
                         <td data-th="mobile">{{$pendingOrder->mobile}}</td>
                         <td data-th="Created Branch">{{$pendingOrder->branchName}}</td>
                         <td data-th="Paid Amount">{{$pendingOrder->paid_amount}}</td>
-                        <td data-th="Actions"><button  type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}" >View</button>
+                        <td data-th="Change Status"> 
+                            <select id="working_status" class=" browser-default form-control working_status" >
+                                <option value="NotStart" {{$pendingOrder->working_status == "NotStart" ? 'selected':''}}>Not Start</option>
+                                <option value="InProgress" {{$pendingOrder->working_status == "InProgress" ? 'selected':''}}>In Progress</option>
+                                <option value="Stuck" {{$pendingOrder->working_status == "Stuck" ? 'selected':''}}>Stuck</option>
+                            </select> </td>
+                        <td data-th="Actions">
+                            <button type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}">View</button>
                         </td>
                     </tr>
                     @endforeach
