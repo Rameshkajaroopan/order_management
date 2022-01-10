@@ -17,11 +17,27 @@ class OrderController extends Controller
     {
         $branch_status = $request->branch_status;
 
+         if ($request->input("from")) {
+            $from = $request->from;
+          } else {
+            $from = "";
+          }
+          if ($request->input("to")) {
+            $to = $request->input("to");
+          } else {
+            $to = "";
+          }
+
+
         $completedOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->join('users', 'orders.created_user_id', '=', 'users.id')
             ->join('branches', 'orders.created_branch_id', '=', 'branches.id')
             ->where('orders.working_status', '=', 'Completed')
             ->orderBy('orders.id');
+    
+            if(  ($from != "") && ($to != "")){
+                $completedOrders =    $completedOrders->whereBetween('orders.created_date', [$from, $to]);
+            }
 
         if ($branch_status != "") {
             $completedOrders =   $completedOrders->where('orders.created_branch_id', '=', $branch_status);
@@ -41,8 +57,9 @@ class OrderController extends Controller
             ->with('branches', $branches)
             ->with('users', $users)
             ->with('locations', $locations)
+            ->with('from', $from)
+            ->with('to', $to)
             ->with('branch_status', $branch_status);
-           
     }
 
     public function pendingOrder(Request $request)
@@ -65,6 +82,8 @@ class OrderController extends Controller
 
             $pendingOrders =   $pendingOrders->where('orders.working_status', '=', $location_status);
         }
+
+
 
         $pendingOrders =  $pendingOrders->orderBy('orders.id', 'desc')
             ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
@@ -111,5 +130,13 @@ class OrderController extends Controller
         $viewOrder->approved_user_name = $approved_user_name;
 
         return json_encode($viewOrder);
+    }
+
+    public function changeWorking(Request $request){
+       
+        $working_status = $request->working_status;
+        $order_id = $request->order_id;
+
+        Order::where('id', $order_id)->update(['working_status' =>  $working_status]);
     }
 }

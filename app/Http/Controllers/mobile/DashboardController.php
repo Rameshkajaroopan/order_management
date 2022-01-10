@@ -20,11 +20,14 @@ class DashboardController extends Controller
 
         $branchId = Auth::user()->branch_id;
 
-        $createdOrderCount = Order::where('created_branch_id', '=', $branchId)
+        $totalCount = Order::where('created_branch_id', '=', $branchId)
+            ->count();
+
+        $NewCount = Order::where('created_branch_id', '=', $branchId)
             ->where('working_status', '=', 'NotStart')
             ->count();
 
-        $sendingOrderCount = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+        $sentCount = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->where('order_transfers.requested_branch_id', '=', $branchId)
             ->where('orders.working_status', '=', 'InProgress')
             ->count();
@@ -35,38 +38,56 @@ class DashboardController extends Controller
             ->where('orders.working_status', '=', 'InProgress')
             ->count();
 
-        // $receivedOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
-        //     ->where('order_transfers.approved_branch_id', '=', $branchId)
-        //     ->where('order_transfers.request_status', '=', 'Approved')
-        //     ->count();
-
-        $receivedNotCompletedOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+        $receivedCount = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->where('order_transfers.approved_branch_id', '=', $branchId)
             ->where('orders.working_status', '=', 'InProgress')
             ->count();
 
-        // $receivedCompletedOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
-        //     ->where('order_transfers.approved_branch_id', '=', $branchId)
-        //     ->where('orders.working_status', '=', 'Completed')
-        //     ->count();
-
-        $stuckOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
-            ->where('orders.working_status', '=', 'Stuck')
-            ->where(
-                function ($query) use ($branchId) {
-                    return $query
-                        ->where('order_transfers.approved_branch_id', '=', $branchId)
-                        ->orWhere('order_transfers.requested_branch_id', '=', $branchId);
-                }
-            )
+        // today 
+        $totalCountToday = Order::where('created_branch_id', '=', $branchId)
+            ->whereDate('created_date', Carbon::now()->toDateString())
             ->count();
 
+        $NewCountToday = Order::where('created_branch_id', '=', $branchId)
+            ->where('working_status', '=', 'NotStart')
+            ->whereDate('created_date', Carbon::now()->toDateString())
+            ->count();
+
+        $sentCountToday = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+            ->where('order_transfers.requested_branch_id', '=', $branchId)
+            ->where('orders.working_status', '=', 'InProgress')
+            ->whereDate('order_transfers.requested_date', Carbon::now()->toDateString())
+            ->count();
+
+
+        $receivedCountToday = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+            ->where('order_transfers.approved_branch_id', '=', $branchId)
+            ->where('orders.working_status', '=', 'InProgress')
+            ->whereDate('order_transfers.requested_date', Carbon::now()->toDateString())
+            ->count();
+
+        // $stuckOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+        //     ->where('orders.working_status', '=', 'Stuck')
+        //     ->where(
+        //         function ($query) use ($branchId) {
+        //             return $query
+        //                 ->where('order_transfers.approved_branch_id', '=', $branchId)
+        //                 ->orWhere('order_transfers.requested_branch_id', '=', $branchId);
+        //         }
+        //     )
+        //     ->count();
+
+
         return response()->json([
-            'createdOrderCount' => $createdOrderCount,
-            'sendingOrderCount' => $sendingOrderCount,
+            'NewCount' => $NewCount,
+            'sentCount' => $sentCount,
             'notificationOrder' => $notificationOrder,
-            'receivedNotCompletedOrder' => $receivedNotCompletedOrder,
-            'stuckOrder' => $stuckOrder
+            'receivedCount' => $receivedCount,
+            'totalCount' => $totalCount,
+            'NewCountToday' => $NewCountToday,
+            'sentCountToday' => $sentCountToday,
+            'receivedCountToday' => $receivedCountToday,
+            'totalCountToday' => $totalCountToday
         ]);
     }
 }

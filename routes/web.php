@@ -49,6 +49,7 @@ Route::get('/completedOrder',  'App\Http\Controllers\OrderController@completedOr
 // get pending orders
 Route::get('/pendingOrder',  'App\Http\Controllers\OrderController@pendingOrder')->name('order.pendingOrder');
 Route::get('/viewOrder',  'App\Http\Controllers\OrderController@viewOrder')->name('order.viewOrder');
+Route::get('/changeWorking',  'App\Http\Controllers\OrderController@changeWorking')->name('order.changeWorking');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 

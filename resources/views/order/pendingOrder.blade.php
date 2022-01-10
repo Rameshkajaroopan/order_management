@@ -176,7 +176,6 @@
                     </tr>
                     @endforeach
                 </table>
-
             </div>
         </div>
     </div>
@@ -214,9 +213,9 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label> Created  User</label>
+                                <label> Created User</label>
                                 <div class="form-group">
-                                    <input id="created_user_name"  type="text" class="form-control modelView" value="" disabled />
+                                    <input id="created_user_name" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
@@ -319,10 +318,11 @@
 </div>
 <script>
     $(document).ready(function() {
-    
+        console.log('hi');
+
         $(".view_button").click(function() {
-           
-            order_id =  $(this).attr('data_id');
+
+            order_id = $(this).attr('data_id');
             $.ajax({
                 method: "get",
                 url: "/viewOrder",
@@ -349,6 +349,48 @@
                     $('#viewModal').modal('show')
                 }
             });
+        });
+
+        $(".working_status").on('change', function() {
+
+            var order_id = $(this).attr('data-id');
+            var working_status = $(this).val();
+            console.log(order_id);
+            if (working_status == "Completed") {
+                var result = confirm("Do you want to change status to complited");
+
+                if (result) {
+                    $.ajax({
+                        method: "get",
+                        url: "/changeWorking",
+                        data: {
+                            order_id: order_id,
+                            working_status: working_status,
+                        },
+                        success: function(result) {
+                            console.log(result);
+                            location.reload();
+                        }
+
+                    });
+                } else {
+                    location.reload();
+                }
+            } else {
+                $.ajax({
+                    method: "get",
+                    url: "/changeWorking",
+                    data: {
+                        order_id: order_id,
+                        working_status: working_status,
+                    },
+                    success: function(result) {
+                        console.log(result);
+                        location.reload();
+                    }
+
+                });
+            }
         });
     });
 </script>

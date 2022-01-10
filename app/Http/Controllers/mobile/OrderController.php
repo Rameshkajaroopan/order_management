@@ -21,7 +21,7 @@ class OrderController extends Controller
 
         $createdOrder = Order::where('created_branch_id', '=', $branchId)
             ->where('working_status', '=', 'NotStart')
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name','orders.created_date as created_date')
             ->get();
 
         return response()->json(['createdOrder' => $createdOrder]);
@@ -45,7 +45,6 @@ class OrderController extends Controller
             ->where('order_transfers.request_status', '=', 'Approved')
             ->where('orders.working_status', '=', 'InProgress')
             ->count();
-
 
         return response()->json(['sentApprovedOrder' => $sentApprovedOrder, 'locations' => $locations, 'sentApprovedOrderCount' =>  $sentApprovedOrderCount]);
     }
