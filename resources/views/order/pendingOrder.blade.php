@@ -148,6 +148,7 @@
                             <option value="NotStart" {{$location_status == "NotStart" ? 'selected':''}}>Not Start</option>
                             <option value="InProgress" {{$location_status == "InProgress" ? 'selected':''}}>In Progress</option>
                             <option value="Stuck" {{$location_status == "Stuck" ? 'selected':''}}>Stuck</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -180,10 +181,12 @@
                         <td data-th="Created Branch">{{$pendingOrder->branchName}}</td>
                         <td data-th="Paid Amount">{{$pendingOrder->paid_amount}}</td>
                         <td data-th="Change Status"> 
-                            <select id="working_status" class=" browser-default form-control working_status" >
+                            <select id="working_status" data-id="{{$pendingOrder->Oid}}" class=" browser-default form-control working_status" >
                                 <option value="NotStart" {{$pendingOrder->working_status == "NotStart" ? 'selected':''}}>Not Start</option>
                                 <option value="InProgress" {{$pendingOrder->working_status == "InProgress" ? 'selected':''}}>In Progress</option>
                                 <option value="Stuck" {{$pendingOrder->working_status == "Stuck" ? 'selected':''}}>Stuck</option>
+                                <option value="Completed" {{$pendingOrder->working_status == "Completed" ? 'selected':''}}>Completed</option>
+
                             </select> </td>
                         <td data-th="Actions">
                             <button type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}">View</button>
