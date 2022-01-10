@@ -18,7 +18,7 @@
 <body class="hold-transition dark-mode login-page ">
 <div class="login-box">
     <div class="login-logo">
-        <a><img src="{{ asset('storage/logo.png')}}"></a>
+        <a><img src="{{ asset('storage/Logo.png')}}"></a>
     </div>
     <!-- /.login-logo -->
 
