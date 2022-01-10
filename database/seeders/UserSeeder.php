@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'user_name' => 'kopi',
             'email' => 'kopi@gmail.com',
             'branch_id' => 1,
-            'password' => Hash::make('password'),
+            'password' => 'password',
         ]);
 
         DB::table('users')->insert([
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'thusapan@gmail.com',
             'user_name' => 'thusapan',
             'branch_id' => 2,
-            'password' => Hash::make('password'),
+            'password' => 'password',
         ]);
 
         DB::table('users')->insert([
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'email' => 'kalai@gmail.com',
             'user_name' => 'kalai',
             'branch_id' => 3,
-            'password' => Hash::make('password'),
+            'password' => 'password',
         ]);
 
         DB::table('users')->insert([
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             'email' => 'nilavan@gmail.com',
             'branch_id' => 1,
             'user_name' => 'nilavan',
-            'password' => Hash::make('password'),
+            'password' => 'password',
         ]);
 
         DB::table('users')->insert([
@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
             'email' => 'mayuran@gmail.com',
             'branch_id' => 2,
             'user_name' => 'mayuran',
-            'password' => Hash::make('password'),
+            'password' => 'password',
         ]);
 
         DB::table('users')->insert([
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
             'email' => 'kajan@gmail.com',
             'branch_id' => 3,
             'user_name' => 'kajan',
-            'password' => Hash::make('password'),
+            'password' => 'password',
         ]);
     }
 }

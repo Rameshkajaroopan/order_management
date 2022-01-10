@@ -171,7 +171,7 @@
                         <td data-th="mobile">{{$pendingOrder->mobile}}</td>
                         <td data-th="Created Branch">{{$pendingOrder->branchName}}</td>
                         <td data-th="Paid Amount">{{$pendingOrder->paid_amount}}</td>
-                        <td data-th="Actions"><button  type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->id}}" >View</button>
+                        <td data-th="Actions"><button  type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}" >View</button>
                         </td>
                     </tr>
                     @endforeach

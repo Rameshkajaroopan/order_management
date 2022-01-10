@@ -24,17 +24,8 @@ class BranchController extends Controller
 
     public function store(Request $request)
     {
-
-        $request->validate([
-            'name' => 'required',
-            'location' => 'required',
-
-        ]);
-
-        $branches = new Branch;
-        $branches->name = $request->input('name');
-        $branches->location = $request->input('location');
-        $branches->save();
+       
+        $branches = Branch::create($request->all());
         
         return Redirect('/branch');
        
@@ -48,28 +39,23 @@ class BranchController extends Controller
         return view('branch.edit')->with('branch', $branch);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-      
-        $request->validate([
-            'name' => 'required',
-            'location' => 'required',
-
-        ]);
-
-        $branches =  Branch::find($id);
-        $branches->name = $request->input('name');
-        $branches->location = $request->input('location');
-        $branches->save();
-
-        // return response()->json($branches);
+        $user = Branch::find($request->id)->update($request->all());
         return Redirect('/branch');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $branches = Branch::find($id);
+        $branches = Branch::find($request->id);
         $branches->delete();
-        return redirect('/branch');
+        return $branches;
+    }
+
+    public function branchView(Request $request){
+        $branch = Branch::find($request->id);;
+        return json_encode($branch);
+
+        
     }
 }

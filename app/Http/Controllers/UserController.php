@@ -28,28 +28,8 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'user_name' => 'user_name',
-            'email' => 'required|unique:users,email',
-            'mobile' => 'required|digits:10|unique:users',
-            'password' => 'required',
-            'role' => 'required',
-            'address' => 'required',
-            'branch_id' => 'required'
-        ]);
-
-        $users = new User;
-        $users->first_name = $request->input('first_name');
-        $users->last_name = $request->input('last_name');
-        $users->user_name = $request->input('user_name');
-        $users->email = $request->input('email');
-        $users->mobile = $request->input('mobile');
-        $users->password = Hash::make($request->input('password'));
-        $users->role = $request->input('role');
-        $users->address = $request->input('address');
-        $users->branch_id = $request->input('branch_id');
-        $users->save();
+    
+        User::create($request->all()+['role'=> 'user']);
 
         return redirect('/user');
     }
@@ -64,30 +44,18 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        dd($request);
-        
-
-
-        $users = User::find($request->id);
-
-        $users->first_name = $request->input('first_name');
-        $users->last_name = $request->input('last_name');
-        $users->email = $request->input('email');
-        $users->mobile = $request->input('mobile');
-        $users->password = Hash::make($request->input('password'));
-        $users->role = $request->input('role');
-        $users->address = $request->input('address');
-        $users->branch_id = $request->input('branch_id');
-        $users->save();
+  
+        $users = User::find($request->id)->update($request->all());
 
         return redirect('/user');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
+    
     {
-            $user = User::find($id);
+            $user = User::find($request->id);
             $user->delete();
-            return redirect('/user');
+            return $user;
             
 
     }

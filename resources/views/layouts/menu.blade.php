@@ -46,7 +46,7 @@
 
 </br>
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="{{route('branch.index')}}" class="nav-link">
         <i class="nav-icon fas fa-bookmark"></i>
         <p>
             Branches
@@ -57,7 +57,7 @@
 </li></br>
 
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="{{route('location.index')}}" class="nav-link">
         <i class="nav-icon fas fa-map-marker"></i>
         <p>
             Locations
