@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderTransfer;
+use App\Models\User;
+use App\Models\Branch;
 
 class Order extends Model
 {
@@ -41,5 +43,8 @@ class Order extends Model
     }
     public function branch() {
         return $this->belongsTo(Branch::class,'created_branch_id', 'id');
+    }
+    public function user() {
+        return $this->belongsTo(User::class,'created_user_id', 'id');
     }
 }

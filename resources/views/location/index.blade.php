@@ -26,6 +26,7 @@
   }
 
   .rwd-table th {
+    color: #3f6791;
     display: none;
   }
 

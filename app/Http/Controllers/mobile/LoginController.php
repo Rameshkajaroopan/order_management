@@ -31,19 +31,23 @@ class LoginController extends Controller
     {
 
         // if (User::where('user_name', $request->user_name)->value('role') != 'admin') {
-            $credentials = $request->only('user_name', 'password');
-
-            if (Auth::attempt($credentials)) {
-                /** @var \App\Models\MyUserModel $user **/
-                $user = Auth::user();
-                $token  = $user->createToken('tokens')->plainTextToken;
-
-                DB::table('users')
-                    ->where('id', Auth::user()->id)
-                    ->update(['remember_token' =>  $token]);
-                return response()->json(['token' => $token]);
-            }
+        $user = User::where('user_name', $request->user_name)
+            ->where('password', $request->password)
+            ->first();
+        if (!isset($user)) {
             return response()->json(['message' => 'Not successfuly login']);
+        }
+        Auth::login($user);
+        /** @var \App\Models\MyUserModel $user **/
+        $user = Auth::user();
+        $token  = $user->createToken('tokens')->plainTextToken;
+
+        DB::table('users')
+            ->where('id', Auth::user()->id)
+            ->update(['remember_token' =>  $token]);
+        return response()->json(['token' => $token]);
+
+
         // }
         // return response()->json(['message' => 'You can not login by user']);
     }
@@ -58,4 +62,3 @@ class LoginController extends Controller
         return response()->json(['message' => 'Your successfully logout']);
     }
 }
-

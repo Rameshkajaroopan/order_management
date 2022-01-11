@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $branch_status = $request->branch_status;
         $users = User::get();
-       $branches = Branch::all();
+        $branches = Branch::all();
         return view('user.index')->with('users',$users)->with('branches',$branches);
     }
 

@@ -31,7 +31,7 @@ class ButtonClickController extends Controller
         return response()->json(["successfully send a request"]);
         return redirect("/newOrder");
     }
-
+ 
     public function deliverSameBranch(Request $request)
     {
         $branchName = Branch::where('id', Auth::user()->branch_id)->value('name');
@@ -73,5 +73,12 @@ class ButtonClickController extends Controller
         Order::where('serial_number', $request->serial_number)->update([
             'working_status' => 'Stuck'
         ]);
+    }
+
+    public function orderSearch(Request $request)
+    {
+        $serial_number = $request->serialnumber;
+
+
     }
 }

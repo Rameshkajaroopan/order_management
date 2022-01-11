@@ -66,16 +66,16 @@ class DashboardController extends Controller
             ->whereDate('order_transfers.requested_date', Carbon::now()->toDateString())
             ->count();
 
-        // $stuckOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
-        //     ->where('orders.working_status', '=', 'Stuck')
-        //     ->where(
-        //         function ($query) use ($branchId) {
-        //             return $query
-        //                 ->where('order_transfers.approved_branch_id', '=', $branchId)
-        //                 ->orWhere('order_transfers.requested_branch_id', '=', $branchId);
-        //         }
-        //     )
-        //     ->count();
+        $stuckOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+            ->where('orders.working_status', '=', 'Stuck')
+            ->where(
+                function ($query) use ($branchId) {
+                    return $query
+                        ->where('order_transfers.approved_branch_id', '=', $branchId)
+                        ->orWhere('order_transfers.requested_branch_id', '=', $branchId);
+                }
+            )
+            ->count();
 
 
         return response()->json([

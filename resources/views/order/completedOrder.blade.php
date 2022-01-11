@@ -3,121 +3,129 @@
 @section('content')
 
 <style>
-
-.rwd-table {
-    margin: auto;
-    min-width: 300px;
-    max-width: 100%;
-    border-collapse: collapse;
-  }
-
-  .custom-txt-right{
-      text-align: right !important;
-  }
-  
-  .rwd-table tr:first-child {
-    border-top: none;
-    color: #495057;
-    
-  }
-
-  .rwd-table td{
-    border-top: 0 !important;
-
-  }
-  
-  .rwd-table th {
-    display: none;
-  }
-  
-  .rwd-table td {
-    display: block;
-  }
-  
-  .rwd-table td:first-child {
-    margin-top: .5em;
-  }
-  
-  .rwd-table td:last-child {
-    margin-bottom: .5em;
-  }
-  
-  .rwd-table td:before {
-    content: attr(data-th) "";
-    font-weight: bold;
-    width: 120px;
-    display: inline-block;
-    color: #495057;
-  }
-
-  
-  .rwd-table th,
-  .rwd-table td {
-    text-align: left;
-  }
-  
-  .rwd-table {
-    color: #333;
-    border-radius: .4em;
-    overflow: hidden;
-  }
-  
-  .rwd-table tr {
-    border-color: #bfbfbf;
-  }
-  
-  .rwd-table th,
-  .rwd-table td {
-    padding: .5em 1em;
-  }
-  @media screen and (max-width: 601px) {
-    .rwd-table tr:nth-child(2) {
-      border-top: none;
+    .rwd-table {
+        margin: auto;
+        min-width: 300px;
+        max-width: 100%;
+        border-collapse: collapse;
     }
 
-    .rwd-table td:nth-of-type(1){
-        background-color:#495057 ;
-        color:white;
-        display: grid;
+    .custom-txt-right {
+        text-align: right !important;
     }
 
-    .rwd-table td:nth-of-type(1):before { content: "" !important;}
+    .rwd-table tr:first-child {
+        border-top: none;
+        color: #495057;
 
-    .custom-txt-right{
-        text-align: left !important;
     }
-    
 
-   
-  }
-  @media screen and (min-width: 600px) {
-    .rwd-table tr:hover:not(:first-child) {
-      background-color: #d8e7f3;
-    }
-    .rwd-table td:before {
-      display: none;
-    }
-    .rwd-table th,
     .rwd-table td {
-      display: table-cell;
-      padding: .25em .5em;
+        border-top: 0 !important;
+
     }
-    .rwd-table th:first-child,
+
+    .rwd-table th {
+        color: #3f6791;
+        display: none;
+    }
+
+    .rwd-table td {
+        display: block;
+    }
+
     .rwd-table td:first-child {
-      padding-left: 0;
+        margin-top: .5em;
     }
-    .rwd-table th:last-child,
+
     .rwd-table td:last-child {
-      padding-right: 0;
+        margin-bottom: .5em;
     }
+
+    .rwd-table td:before {
+        content: attr(data-th) "";
+        font-weight: bold;
+        width: 120px;
+        display: inline-block;
+        color: #495057;
+    }
+
+
     .rwd-table th,
     .rwd-table td {
-      padding: 1em !important;
+        text-align: left;
     }
 
+    .rwd-table {
+        color: #333;
+        border-radius: .4em;
+        overflow: hidden;
+    }
 
-}
+    .rwd-table tr {
+        border-color: #bfbfbf;
+    }
 
+    .rwd-table th,
+    .rwd-table td {
+        padding: .5em 1em;
+    }
+
+    @media screen and (max-width: 601px) {
+        .rwd-table tr:nth-child(2) {
+            border-top: none;
+        }
+
+        .rwd-table td:nth-of-type(1) {
+            background-color: #495057;
+            color: white;
+            display: grid;
+        }
+
+        .rwd-table td:nth-of-type(1):before {
+            content: "" !important;
+        }
+
+        .custom-txt-right {
+            text-align: left !important;
+        }
+
+
+
+    }
+
+    @media screen and (min-width: 600px) {
+        .rwd-table tr:hover:not(:first-child) {
+            background-color: #d8e7f3;
+        }
+
+        .rwd-table td:before {
+            display: none;
+        }
+
+        .rwd-table th,
+        .rwd-table td {
+            display: table-cell;
+            padding: .25em .5em;
+        }
+
+        .rwd-table th:first-child,
+        .rwd-table td:first-child {
+            padding-left: 0;
+        }
+
+        .rwd-table th:last-child,
+        .rwd-table td:last-child {
+            padding-right: 0;
+        }
+
+        .rwd-table th,
+        .rwd-table td {
+            padding: 1em !important;
+        }
+
+
+    }
 </style>
 <!-- <div class="row">
     <div class="col-sm-12">
@@ -144,45 +152,57 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-             <div class="card-body">
+            <div class="card-body">
 
-            <form action="/completedOrder" method="GET" class="row m-0">
+                <form action="/completedOrder" method="GET" class="row m-0">
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <strong>From</strong>
-                        <input type="date" name="from" id="from" value="{{$from}}" class="form-control" required >
+                    <div class="col-md-2.5">
+                        <div class="form-group">
+                            <strong>From</strong>
+                            <input type="date" name="from" id="from" value="{{$from}}" class="form-control" required>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <strong>To</strong>
-                        <input type="date" name="to" id="to" value="{{$to}}" class="form-control" required>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="col-md-2.5">
+                        <div class="form-group">
+                            <strong>To</strong>
+                            <input type="date" name="to" id="to" value="{{$to}}" class="form-control">
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group ">
-                    <strong>Created Branch</strong>
-                        <select id="branch_status"  name="branch_status"  class=" browser-default form-control" >
-                            <option value="" {{$branch_status == "" ? 'selected':''}}>All</option>
-                            @foreach($branches as $branch )
-                            <option value="{{$branch->id}}" {{$branch_status == "$branch->id" ? 'selected':''}}>{{$branch->name}}</option>
-                            @endforeach
-                        </select>
+                    &nbsp;
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <strong>Working Status</strong>
+                            <select id="working_status" class=" browser-default form-control" name="working_status">
+                                <option value="" {{$working_status == "" ? 'selected':''}}>All</option>
+                                <option value="Stuck" {{$working_status == "Stuck" ? 'selected':''}}>Stuck</option>
+                                <option value="Completed" {{$working_status == "Completed" ? 'selected':''}}>Completed</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-1">
-                    <div class="form-group ">
-                        <br>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <strong>Created Branch</strong>
+                            <select id="branch_status" name="branch_status" class=" browser-default form-control">
+                                <option value="" {{$branch_status == "" ? 'selected':''}}>All</option>
+                                @foreach($branches as $branch )
+                                <option value="{{$branch->id}}" {{$branch_status == "$branch->id" ? 'selected':''}}>{{$branch->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
-            </form>
 
+                    <div class="col-md-1">
+                        <div class="form-group ">
+                            <br>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
         </div>
-</div>
 
 
     </div>
@@ -195,21 +215,21 @@
 
                 <table id="zero_config" class="table rwd-table table table-striped table table-hover table table-striped table-bordered no-wrap fixed table table-striped table-bordered no-wrap fixed">
                     <tr>
-                        <th >Order</th>
-                        <th >Customer</th>
-                        <th >mobile</th>
-                        <th >Created Branch</th>
-                        <th >Paid Amount</th>
-                        <th >Actions</th>
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>mobile</th>
+                        <th>Created Branch</th>
+                        <th>Paid Amount</th>
+                        <th>Actions</th>
                     </tr>
                     @foreach($pendingOrders as $pendingOrder)
                     <tr>
-                    <td data-th="Order">{{$pendingOrder->serial_number}}</td>
+                        <td data-th="Order">{{$pendingOrder->serial_number}}</td>
                         <td data-th="Customer">{{$pendingOrder->customer_name}}</td>
                         <td data-th="mobile">{{$pendingOrder->mobile}}</td>
                         <td data-th="Created Branch">{{$pendingOrder->branchName}}</td>
                         <td data-th="Paid Amount">{{$pendingOrder->paid_amount}}</td>
-                        <td data-th="Actions"><button  type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}" >View</button>
+                        <td data-th="Actions"><button type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}">View</button>
                         </td>
                     </tr>
                     @endforeach
@@ -252,9 +272,9 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label> Created  User</label>
+                                <label> Created User</label>
                                 <div class="form-group">
-                                    <input id="created_user_name"  type="text" class="form-control modelView" value="" disabled />
+                                    <input id="created_user_name" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
@@ -357,10 +377,10 @@
 </div>
 <script>
     $(document).ready(function() {
-    
+
         $(".view_button").click(function() {
-           
-            order_id =  $(this).attr('data_id');
+
+            order_id = $(this).attr('data_id');
             $.ajax({
                 method: "get",
                 url: "/viewOrder",
