@@ -27,9 +27,11 @@ class ButtonClickController extends Controller
         $OrderTransfer->current_location  =  "InTransit";
         $OrderTransfer->request_status  =  "NotApproved";
         $OrderTransfer->save();
-
+        Order::where('serial_number', $request->serial_number)->update([
+            'working_status' => 'InProgress'
+        ]);
         return response()->json(["successfully send a request"]);
-        return redirect("/newOrder");
+       
     }
  
     public function deliverSameBranch(Request $request)
@@ -77,8 +79,14 @@ class ButtonClickController extends Controller
 
     public function orderSearch(Request $request)
     {
-        $serial_number = $request->serialnumber;
+       
+        $serial_number = $request->serial_number;
 
+        $searOrder = Order::where('serial_number','like', '%'.$serial_number.'%')
+        ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+        ->get();
+
+        return response()->json([ 'searOrder' =>  $searOrder]);
 
     }
 }
