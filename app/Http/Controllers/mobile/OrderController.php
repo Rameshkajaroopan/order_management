@@ -159,7 +159,7 @@ class OrderController extends Controller
 
          $request->validate([
             'serial_number' => 'required|unique:orders',
-            'mobile' => 'required|unique:orders',
+           
         ]);
 
         $newOrder = new Order;
