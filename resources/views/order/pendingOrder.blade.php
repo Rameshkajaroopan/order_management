@@ -376,8 +376,8 @@
             var order_id = $(this).attr('data-id');
             var working_status = $(this).val();
             console.log(order_id);
-            if (working_status == "Completed") {
-                var result = confirm("Do you want to change status to complited");
+            if (working_status == "Completed" || working_status == "Stuck") {
+                var result = confirm("Do you want to change status");
 
                 if (result) {
                     $.ajax({

@@ -157,6 +157,11 @@ class OrderController extends Controller
     {
         $branchName =   Branch::where('id', '=', Auth::user()->branch_id)->value('name');
 
+         $request->validate([
+            'serial_number' => 'required|unique:orders',
+            'mobile' => 'required|unique:orders',
+        ]);
+
         $newOrder = new Order;
 
         $newOrder->serial_number = $request->input('serial_number');
@@ -176,6 +181,7 @@ class OrderController extends Controller
         $newOrder->img = $request->input('img');
         $newOrder->working_status = "NotStart";
         $newOrder->save();
+
 
         return response()->json(["messages" => "Successfully created order"]);
     }
