@@ -60,7 +60,7 @@ class OrderController extends Controller
 
         $completedOrders =  $completedOrders->orderBy('orders.id', 'desc')
             ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
-            ->get();
+            ->paginate(10);
 
         $branches =  Branch::get();
 
@@ -68,7 +68,7 @@ class OrderController extends Controller
         $locations = Location::get();
 
         return view('order.completedOrder')
-            ->with('pendingOrders', $completedOrders)
+            ->with('completedOrders', $completedOrders)
             ->with('branches', $branches)
             ->with('users', $users)
             ->with('locations', $locations)
@@ -105,7 +105,7 @@ class OrderController extends Controller
 
         $pendingOrders =  $pendingOrders->orderBy('orders.id', 'desc')
             ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
-            ->get();
+            ->paginate(20);
 
         $branches =  Branch::get();
 
@@ -138,7 +138,6 @@ class OrderController extends Controller
         $created_user_name =  User::where('id',  $viewOrder->created_user_id)->value('first_name');
         $requested_user_name =  User::where('id',  $viewOrder->requested_user_id)->value('first_name');
         $approved_user_name =  User::where('id',  $viewOrder->approved_user_id)->value('first_name');
-
 
         $viewOrder->created_branch_name = $created_branch_name;
         $viewOrder->requested_branch_name = $requested_branch_name;

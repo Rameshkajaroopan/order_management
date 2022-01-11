@@ -22,7 +22,7 @@
 
     .rwd-table td {
         border-top: 0 !important;
-       
+
     }
 
     .rwd-table th {
@@ -196,6 +196,8 @@
                     </tr>
                     @endforeach
                 </table>
+                <br>
+                <div class="float-right" >{!!$pendingOrders->appends(request()->query()) !!}</div>
             </div>
         </div>
     </div>

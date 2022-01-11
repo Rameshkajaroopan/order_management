@@ -222,19 +222,20 @@
                         <th>Paid Amount</th>
                         <th>Actions</th>
                     </tr>
-                    @foreach($pendingOrders as $pendingOrder)
+                    @foreach($completedOrders as $completedOrder)
                     <tr>
-                        <td data-th="Order">{{$pendingOrder->serial_number}}</td>
-                        <td data-th="Customer">{{$pendingOrder->customer_name}}</td>
-                        <td data-th="mobile">{{$pendingOrder->mobile}}</td>
-                        <td data-th="Created Branch">{{$pendingOrder->branchName}}</td>
-                        <td data-th="Paid Amount">{{$pendingOrder->paid_amount}}</td>
-                        <td data-th="Actions"><button type="button" class="btn btn-primary view_button" data_id="{{$pendingOrder->Oid}}">View</button>
+                        <td data-th="Order">{{$completedOrder->serial_number}}</td>
+                        <td data-th="Customer">{{$completedOrder->customer_name}}</td>
+                        <td data-th="mobile">{{$completedOrder->mobile}}</td>
+                        <td data-th="Created Branch">{{$completedOrder->branchName}}</td>
+                        <td data-th="Paid Amount">{{$completedOrder->paid_amount}}</td>
+                        <td data-th="Actions"><button type="button" class="btn btn-primary view_button" data_id="{{$completedOrder->Oid}}">View</button>
                         </td>
                     </tr>
                     @endforeach
                 </table>
-
+                <br>
+                <div class="float-right" >{!!$completedOrders->appends(request()->query()) !!}</div>
             </div>
         </div>
     </div>
