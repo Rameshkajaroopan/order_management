@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Branch;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use App\Models\Location;
 
 
@@ -21,7 +22,7 @@ class OrderController extends Controller
 
         $createdOrder = Order::where('created_branch_id', '=', $branchId)
             ->where('working_status', '=', 'NotStart')
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name','orders.created_date as created_date')
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date')
             ->get();
 
         return response()->json(['createdOrder' => $createdOrder]);
@@ -35,8 +36,7 @@ class OrderController extends Controller
             ->where('order_transfers.requested_branch_id', '=', $branchId)
             ->where('order_transfers.request_status', '=', 'Approved')
             ->where('orders.working_status', '=', 'InProgress')
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'order_transfers.location_status as location')
-            ->get();
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date')->get();
 
         $locations = Location::all();
 
@@ -58,7 +58,7 @@ class OrderController extends Controller
             ->where('order_transfers.requested_branch_id', '=', $branchId)
             ->where('order_transfers.location_status', '=', 'InTransit')
             ->where('orders.working_status', '=', 'InProgress')
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date')
             ->get();
 
         $sentNotApprovedOrderCount = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
@@ -78,7 +78,7 @@ class OrderController extends Controller
             ->where('order_transfers.approved_branch_id', '=', $branchId)
             ->where('order_transfers.request_status', '=', 'NotApproved')
             ->where('orders.working_status', '=', 'InProgress')
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date')
             ->get();
 
         $notificationOrderCount = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
@@ -98,7 +98,7 @@ class OrderController extends Controller
             ->where('order_transfers.approved_branch_id', '=', $branchId)
             ->where('orders.working_status', '=', 'InProgress')
             ->where('order_transfers.request_status', '=', 'Approved')
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date')
             ->get();
 
         $receivedNotCompletedOrderCount = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
@@ -117,7 +117,8 @@ class OrderController extends Controller
         $receivedCompletedOrder = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->where('order_transfers.approved_branch_id', '=', $branchId)
             ->where('orders.working_status', '=', 'Completed')
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+            ->whereDate('orders.updated_at', '=', Carbon::now()->toDateString() )
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date')
             ->get();
 
         return response()->json(['receivedCompletedOrder' => $receivedCompletedOrder]);
@@ -136,7 +137,7 @@ class OrderController extends Controller
                         ->orWhere('order_transfers.requested_branch_id', '=', $branchId);
                 }
             )
-            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+            ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date')
             ->get();
 
         $stuckOrderCount = Order::join('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
@@ -150,16 +151,15 @@ class OrderController extends Controller
             )
             ->count();
 
-        return response()->json(['stuckOrder' => $stuckOrder , 'stuckOrderCount' => $stuckOrderCount]);
+        return response()->json(['stuckOrder' => $stuckOrder, 'stuckOrderCount' => $stuckOrderCount]);
     }
 
     public function createdOrder(Request $request)
     {
         $branchName =   Branch::where('id', '=', Auth::user()->branch_id)->value('name');
 
-         $request->validate([
+        $request->validate([
             'serial_number' => 'required|unique:orders',
-           
         ]);
 
         $newOrder = new Order;
@@ -181,7 +181,6 @@ class OrderController extends Controller
         $newOrder->img = $request->input('img');
         $newOrder->working_status = "NotStart";
         $newOrder->save();
-
 
         return response()->json(["messages" => "Successfully created order"]);
     }

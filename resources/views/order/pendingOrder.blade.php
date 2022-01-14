@@ -353,6 +353,7 @@
                 },
                 success: function(result) {
                     var result = $.parseJSON(result);
+                    $('#viewModal').modal('show')
                     $('#Item').val(result.Item);
                     $('#weight').val(result.weight);
                     $('#total_amount').val(result.total_amount);
@@ -368,7 +369,7 @@
                     $('#approved_user_name').val(result.approved_user_name);
                     $('#requested_date').val(result.requested_date);
                     $('#approved_date').val(result.approved_date);
-                    $('#viewModal').modal('show')
+                   
                 }
             });
         });

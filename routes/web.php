@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
 
 
-Route::get('/test' , function(){
-return view('test');
-});
+
 // Route::get('/mobileLogin',  'App\Http\Controllers\mobile\loginController@index');
 
 // login for web
@@ -54,6 +52,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 });
 
 
+Route::get('/pusher', function () {
+    return view('pusher');
+});
+ 
+Route::get('/send','App\Http\Controllers\mobile\AlertController@notification');
 
+// Route::get('/test', function () {
+//     event(new App\Events\StatusLiked('somenone'));
+//     return "Event has been sent!";
+// });
 
-
+// Route::get('/testblade', function () {
+//     return view("test");
+// });

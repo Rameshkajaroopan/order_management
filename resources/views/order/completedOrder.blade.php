@@ -235,7 +235,7 @@
                     @endforeach
                 </table>
                 <br>
-                <div class="float-right" >{!!$completedOrders->appends(request()->query()) !!}</div>
+                <div class="float-right">{!!$completedOrders->appends(request()->query()) !!}</div>
             </div>
         </div>
     </div>
@@ -315,30 +315,19 @@
 
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <label>Request Branch Name</label>
+                                <div class="form-group">
+                                    <input id="request_branch_name" type="text" class="form-control modelView" value="" disabled />
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
                                 <label>Approved Branch Name</label>
                                 <div class="form-group">
                                     <input id="approved_branch_name" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
-                                <label>Location Status</label>
-                                <div class="form-group">
-                                    <input id="locationStatus" type="text" class="form-control modelView" value="" disabled />
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label>Request Status</label>
-                                <div class="form-group">
-                                    <input id="request_status" type="text" class="form-control modelView" value="" disabled />
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
 
                             <div class="col-md-3">
                                 <label>Requested User</label>
@@ -354,17 +343,27 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
                                 <label>Request Date</label>
                                 <div class="form-group">
                                     <input id="requested_date" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label>Approved Date</label>
                                 <div class="form-group">
                                     <input id="approved_date" type="text" class="form-control modelView" value="" disabled />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Completed Date</label>
+                                <div class="form-group">
+                                    <input id="completed_date" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
@@ -389,6 +388,7 @@
                     order_id: order_id,
                 },
                 success: function(result) {
+                    $('#viewModal').modal('show')
                     var result = $.parseJSON(result);
                     $('#Item').val(result.Item);
                     $('#weight').val(result.weight);
@@ -398,14 +398,15 @@
                     $('#due_date').val(result.due_date);
                     $('#created_user_name').val(result.created_user_name);
                     $('#address').val(result.address);
+                    $('#request_branch_name').val(result.requested_branch_name);
                     $('#approved_branch_name').val(result.approved_branch_name);
                     $('#locationStatus').val(result.location_status);
-                    $('#request_status').val(result.request_status);
+                    $('#completed_date').val(result.updated_at);
                     $('#requested_user_name').val(result.requested_user_name);
                     $('#approved_user_name').val(result.approved_user_name);
                     $('#requested_date').val(result.requested_date);
                     $('#approved_date').val(result.approved_date);
-                    $('#viewModal').modal('show')
+                   
                 }
             });
         });

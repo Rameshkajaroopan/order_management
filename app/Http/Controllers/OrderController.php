@@ -16,6 +16,7 @@ class OrderController extends Controller
 {
     public function completedOrder(Request $request)
     {
+      
         $branch_status = $request->branch_status;
         $working_status = $request->working_status;
 

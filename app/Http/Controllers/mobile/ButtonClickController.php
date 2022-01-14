@@ -22,7 +22,7 @@ class ButtonClickController extends Controller
         $OrderTransfer->order_id =   $order_id;
         $OrderTransfer->requested_branch_id = Auth::user()->branch_id;
         $OrderTransfer->approved_branch_id  = $request->approved_branch_id;
-        $OrderTransfer->requested_date = Carbon::now();
+        $OrderTransfer->requested_date =  Carbon::now()->toDateTimeString();
         $OrderTransfer->requested_user_id  =  Auth::user()->id;
         $OrderTransfer->current_location  =  "InTransit";
         $OrderTransfer->request_status  =  "NotApproved";
@@ -52,7 +52,7 @@ class ButtonClickController extends Controller
         OrderTransfer::where('order_id', $orderId)
             ->update([
                 'request_status' => 'Approved',
-                'approved_date' =>  Carbon::now(),
+                'approved_date' =>   Carbon::now()->toDateTimeString(),
                 'location_status' =>  $branchName
             ]);
     }
@@ -74,6 +74,14 @@ class ButtonClickController extends Controller
     {
         Order::where('serial_number', $request->serial_number)->update([
             'working_status' => 'Stuck'
+        ]);
+    }
+
+    public function completedButton(Request $request)
+
+    {
+        Order::where('serial_number', $request->serial_number)->update([
+            'working_status' => 'Completed'
         ]);
     }
 

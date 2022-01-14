@@ -26,7 +26,6 @@ class SingleOrderController extends Controller
         $singleOrderTransfer = OrderTransfer::find($singleOrderTransferId);
 
 
-
         return response()->json([
             'cutomer_name' => $singleOrder->customer_name,
             'mobile' => $singleOrder->mobile,
