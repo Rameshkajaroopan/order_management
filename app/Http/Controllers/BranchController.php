@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Branch;
+use App\Models\Location;
 
 
 class BranchController extends Controller
@@ -13,8 +14,8 @@ class BranchController extends Controller
     public function index()
     {
         $branches =  Branch::get();
-
-        return view('branch.index', ['branches' => $branches]);
+        $locations = Location::get();
+        return view('branch.index', ['branches' => $branches, 'locations' => $locations]);
     }
 
     public function create()
@@ -24,16 +25,16 @@ class BranchController extends Controller
 
     public function store(Request $request)
     {
-       
+        $request->Location_id = (int)$request->Location_id;
+ 
         $branches = Branch::create($request->all());
-        
+
         return Redirect('/branch');
-       
     }
 
     public function edit($id)
     {
-       
+
         $branch = Branch::find($id);
 
         return view('branch.edit')->with('branch', $branch);
@@ -52,10 +53,9 @@ class BranchController extends Controller
         return $branches;
     }
 
-    public function branchView(Request $request){
+    public function branchView(Request $request)
+    {
         $branch = Branch::find($request->id);;
         return json_encode($branch);
-
-        
     }
 }

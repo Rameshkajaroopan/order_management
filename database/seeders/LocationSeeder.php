@@ -17,17 +17,17 @@ class LocationSeeder extends Seeder
     {
         DB::table('locations')->insert([  
             'name' =>'location1', 
-            'branch_id' => 1, 
+            
         ]);
  
         DB::table('locations')->insert([
             'name' =>'location2', 
-            'branch_id' => 2,
+           
         ]);
  
         DB::table('locations')->insert([
             'name' =>'location3', 
-            'branch_id' => 3,
+           
         ]);
     }
 }

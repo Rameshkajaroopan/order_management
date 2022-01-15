@@ -16,18 +16,21 @@ class branchSeeder extends Seeder
     public function run()
     {
         DB::table('branches')->insert([
-            'name' => 'A',
-            'location' =>Str::random(10), 
+            'name' => 'Branch1',
+            'location_id' => 1,
+            'address' =>Str::random(10), 
         ]);
 
         DB::table('branches')->insert([
-            'name' => 'B',
-            'location' =>Str::random(10), 
+            'name' => 'Branch2',
+            'location_id' => 2,
+            'address' =>Str::random(10), 
         ]);
 
         DB::table('branches')->insert([
-            'name' => 'C',
-            'location' =>Str::random(10), 
+            'name' => 'Branch3',
+            'location_id' => 3,
+            'address' =>Str::random(10), 
         ]);
 
       

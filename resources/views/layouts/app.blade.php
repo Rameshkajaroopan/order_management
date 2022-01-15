@@ -17,7 +17,7 @@
             }
         });
     </script>
-      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('third_party_stylesheets')
 
@@ -36,13 +36,14 @@
 
         <!-- Main Header -->
         <nav class="main-header navbar navbar-expand navbar-dark">
+
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
-
+            <div id="heading">Home</div>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

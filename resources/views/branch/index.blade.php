@@ -129,20 +129,20 @@
 </style>
 
 <div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                    <button type="button" class="btn float-right btn-primary add_button " data_id=""> <i class="fas fa-clone mr-2"></i> Add New Branch</button>
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="button" class="btn float-right btn-primary add_button " data_id=""> <i class="fas fa-clone mr-2"></i> Add New Branch</button>
 
-                    </div>
+          </div>
 
-                  
-                </div>
-            </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="row">
@@ -153,24 +153,18 @@
         <table id="zero_config" class="table rwd-table table table-striped table table-hover table table-striped table-bordered no-wrap fixed table table-striped table-bordered no-wrap fixed">
           <tr>
             <th>ID</th>
-
             <th>Branch Name</th>
-            
-
-
-
+            <th>Location Name</th>
             <th>Actions</th>
           </tr>
           @foreach($branches as $branch)
           <tr id="{{$branch->id}}">
-            <td data-th="First Name">{{$branch->id}}</td>
-
-            <td data-th="First Name">{{$branch->name}}</td>
-        
+            <td data-th="Id">{{$branch->id}}</td>
+            <td data-th="Branch Name">{{$branch->name}}</td>
+            <td data-th="Location Name">{{$branch->location->name}}</td>
             <td data-th="Actions">
               <button type="button" class="btn btn-primary view_button" data_id="{{$branch->id}}">Edit</button>
               <button type="button" class="btn btn-secondary deletebutton" data-id="{{$branch->id}}">Delete</button>
-
             </td>
           </tr>
           @endforeach
@@ -197,7 +191,7 @@
                   <label>Id</label>
                   <div class="form-group">
                     <input id="Id" type="text" class="form-control modelView" value="" disabled />
-                    <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden  />
+                    <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden />
 
                   </div>
                 </div>
@@ -209,7 +203,18 @@
                   </div>
                 </div>
 
-               
+                <div class="col-md-6">
+                  <label>Location Name</label>
+                  <div class="form-group">
+                    <select id="location_id" class=" browser-default form-control " name="location_id" required>
+                      @foreach($locations as $location)
+                      <option value="{{$location->id}}">{{$location->name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+
+
               </div>
 
               <button id="submit_button" class="btn btn-light update float-right ml-2" type="submit">Update</button>
@@ -225,7 +230,7 @@
 </div>
 <script>
   $(document).ready(function() {
-
+    $('#heading').html('Branches')
     $(".add_button").click(function() {
 
       $('#Id').val('Auto')
@@ -236,14 +241,14 @@
 
       $('#submit_button').click(function() {
         console.log("submiting");
-$(this).submit();
+        $(this).submit();
       });
 
     });
 
 
     $(".view_button").click(function() {
-        $('.update').text("Update")
+      $('.update').text("Update")
 
       branch_id = $(this).attr('data_id');
       $.ajax({
@@ -258,7 +263,7 @@ $(this).submit();
           $('#Id').val(result.id);
           $('#branch_name').val(result.name);
           $('#Idvalue').val(result.id);
-          
+          $('#location_id').val(result.location_id);
           $('#viewModal').modal('show')
         }
       });
@@ -291,8 +296,6 @@ $(this).submit();
       })
 
     });
-
-
 
   });
 </script>

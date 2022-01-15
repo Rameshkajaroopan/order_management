@@ -16,7 +16,9 @@ class CreateBranchesTable extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('name');
-            $table->string('location')->nullable();
+            $table->bigInteger('location_id')->unsigned();
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.app') @section('content')
 
 <style>
     .rwd-table {
@@ -17,12 +15,10 @@
     .rwd-table tr:first-child {
         border-top: none;
         color: #495057;
-
     }
 
     .rwd-table td {
         border-top: 0 !important;
-
     }
 
     .rwd-table th {
@@ -49,7 +45,6 @@
         display: inline-block;
         color: #495057;
     }
-
 
     .rwd-table th,
     .rwd-table td {
@@ -89,9 +84,6 @@
         .custom-txt-right {
             text-align: left !important;
         }
-
-
-
     }
 
     @media screen and (min-width: 600px) {
@@ -123,8 +115,6 @@
         .rwd-table td {
             padding: 1em !important;
         }
-
-
     }
 </style>
 <div class="row">
@@ -134,13 +124,14 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <strong>Created Branch</strong>
-                        <select id="branch_status" class=" browser-default form-control" onchange="window.location.assign('/pendingOrder?branch_status=' + $('#branch_status').val())">
+                        <select id="branch_status" class=" browser-default form-control" onchange="window.location.assign('/pendingInProgressOrder?branch_status=' + $('#branch_status').val())">
                             <option value="" {{$branch_status == "" ? 'selected':''}}>All</option>
                             @foreach($branches as $branch )
                             <option value="{{$branch->id}}" {{$branch_status == "$branch->id" ? 'selected':''}}>{{$branch->name}}</option>
                             @endforeach
                         </select>
                     </div>
+
 
                 </div>
             </div>
@@ -433,8 +424,7 @@
 <script>
     $(document).ready(function() {
         console.log('hi');
-        $('#heading').html('Notstart Orders');
-
+        $('#heading').html('Inprogress Orders')
         $(".view_button").click(function() {
 
             order_id = $(this).attr('data_id');

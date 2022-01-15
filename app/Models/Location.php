@@ -11,10 +11,8 @@ class Location extends Model
     protected $table = 'locations';
 
     protected $fillable = [
-        'name','branch_id'
+        'name'
     ];
 
-    public function branch() {
-        return $this->belongsTo(Branch::class);
-    }
+   
 }

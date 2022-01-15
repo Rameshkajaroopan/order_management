@@ -129,20 +129,20 @@
 </style>
 
 <div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                    <button type="button" class="btn float-right btn-primary add_button " data_id=""> <i class="fas fa-user mr-2"></i> Add New User</button>
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="button" class="btn float-right btn-primary add_button " data_id=""> <i class="fas fa-user mr-2"></i> Add New User</button>
 
-                    </div>
+          </div>
 
-                  
-                </div>
-            </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="row">
@@ -211,7 +211,7 @@
                   <label>Id</label>
                   <div class="form-group">
                     <input id="Id" type="text" class="form-control modelView" value="" disabled />
-                    <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden  />
+                    <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden />
 
                   </div>
                 </div>
@@ -277,9 +277,9 @@
                   <label>Role</label>
                   <div class="form-group">
                     <select id="role" name="role" class="form-control modelView" selected="selected" required>
-                    <option value="user" >User</option>
-                    <option value="superadmin" >Super Admin</option>
-                    <option value="admin" >Admin</option>
+                      <option value="user">User</option>
+                      <option value="superadmin">Super Admin</option>
+                      <option value="admin">Admin</option>
 
                     </select>
                   </div>
@@ -300,7 +300,7 @@
 </div>
 <script>
   $(document).ready(function() {
-
+    $('#heading').html('Users')
     $(".add_button").click(function() {
 
       $('#Id').val('Auto')
@@ -311,7 +311,7 @@
 
       $('#submit_button').click(function() {
         console.log("submiting");
-$(this).submit();
+        $(this).submit();
       });
 
     });

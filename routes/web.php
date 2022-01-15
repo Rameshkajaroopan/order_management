@@ -46,7 +46,10 @@ Route::post('/location/delete',  'App\Http\Controllers\LocationController@destro
 Route::get('/completedOrder',  'App\Http\Controllers\OrderController@completedOrder')->name('order.completedOrder');
 // get pending orders
 Route::get('/pendingOrder',  'App\Http\Controllers\OrderController@pendingOrder')->name('order.pendingOrder');
+Route::get('/pendingInProgressOrder',  'App\Http\Controllers\OrderController@pendingInProgressOrder')->name('order.pendingInProgressOrder');
 Route::get('/viewOrder',  'App\Http\Controllers\OrderController@viewOrder')->name('order.viewOrder');
+Route::get('/editOrder',  'App\Http\Controllers\OrderController@editOrder')->name('order.editOrder');
+Route::post('/updateOrder',  'App\Http\Controllers\OrderController@updateOrder')->name('pendingorder.update');
 Route::get('/changeWorking',  'App\Http\Controllers\OrderController@changeWorking')->name('order.changeWorking');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });

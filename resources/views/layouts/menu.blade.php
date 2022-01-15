@@ -20,7 +20,13 @@
               <li class="nav-item">
                 <a href="/pendingOrder" class="nav-link">
                   <i class="far fa-clock nav-icon"></i>
-                  <p>Pending Orders</p>
+                  <p>Notstart Orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/pendingInProgressOrder" class="nav-link">
+                  <i class="far fa-clock nav-icon"></i>
+                  <p>Inprogress Orders</p>
                 </a>
               </li>
               <li class="nav-item">

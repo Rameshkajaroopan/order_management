@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Location;
 class Branch extends Model
 {
     protected $primaryKey = 'id';
@@ -12,8 +12,11 @@ class Branch extends Model
 
     protected $fillable = [
         'name',
-        'location',
+        'location_id',
+        'address',
     ];
-   
+    public function location() {
+        return $this->belongsTo(Location::class);
+    }
 
 }

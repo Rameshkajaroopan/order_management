@@ -83,26 +83,19 @@ class OrderController extends Controller
     {
 
         $branch_status = $request->branch_status;
-        $location_status = $request->location_status;
+        // $location_status = $request->location_status;
 
         $pendingOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->join('users', 'orders.created_user_id', '=', 'users.id')
             ->join('branches', 'orders.created_branch_id', '=', 'branches.id')
-            ->where(
-                function ($query)  {
-                    return $query
-                        ->where('orders.working_status', '=', 'InProgress')
-                        ->orWhere('orders.working_status', '=', 'NotStart');
-                }
-            )
-            ->orderBy('orders.id');
+            ->Where('orders.working_status', '=', 'NotStart');
 
         if ($branch_status != "") {
             $pendingOrders =   $pendingOrders->where('orders.created_branch_id', '=', $branch_status);
         }
-        if ($location_status != "") {
-            $pendingOrders =   $pendingOrders->where('orders.working_status', '=', $location_status);
-        }
+        // if ($location_status != "") {
+        //     $pendingOrders =   $pendingOrders->where('orders.working_status', '=', $location_status);
+        // }
 
         $pendingOrders =  $pendingOrders->orderBy('orders.id', 'desc')
             ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
@@ -118,8 +111,42 @@ class OrderController extends Controller
             ->with('branches', $branches)
             ->with('users', $users)
             ->with('locations', $locations)
-            ->with('branch_status', $branch_status)
-            ->with('location_status', $location_status);
+            ->with('branch_status', $branch_status);
+    }
+
+    public function pendingInProgressOrder(Request $request)
+    {
+
+        $branch_status = $request->branch_status;
+        // $location_status = $request->location_status;
+
+        $pendingOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+            ->join('users', 'orders.created_user_id', '=', 'users.id')
+            ->join('branches', 'orders.created_branch_id', '=', 'branches.id')
+            ->Where('orders.working_status', '=', 'InProgress');
+
+        if ($branch_status != "") {
+            $pendingOrders =   $pendingOrders->where('orders.created_branch_id', '=', $branch_status);
+        }
+        // if ($location_status != "") {
+        //     $pendingOrders =   $pendingOrders->where('orders.working_status', '=', $location_status);
+        // }
+
+        $pendingOrders =  $pendingOrders->orderBy('orders.id', 'desc')
+            ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
+            ->paginate(20);
+
+        $branches =  Branch::get();
+
+        $users = User::get();
+        $locations = Location::get();
+
+        return view('order.InprogressOrder')
+            ->with('pendingOrders', $pendingOrders)
+            ->with('branches', $branches)
+            ->with('users', $users)
+            ->with('locations', $locations)
+            ->with('branch_status', $branch_status);
     }
 
     public function viewOrder(Request $request)
@@ -157,5 +184,34 @@ class OrderController extends Controller
         $order_id = $request->order_id;
 
         Order::where('id', $order_id)->update(['working_status' =>  $working_status]);
+    }
+
+    public function editOrder(Request $request)
+    {
+
+        $order_id = $request->order_id;
+
+        $editOrder = Order::find($order_id);
+
+        return json_encode($editOrder);
+    }
+
+    public function updateOrder(Request $request)
+    {
+      
+        Order::where('id',$request->id)
+            ->update([
+                'Item' => $request->Item,
+                'weight' => $request->weight,
+                'customer_name' => $request->customer_name,
+                'mobile' => $request->mobile,
+                'payment_mode' => $request->payment_mode,
+                'total_amount' =>  $request->total_amount,
+                'due_date' => $request->due_date,
+                'created_date' =>  $request->created_date
+            ]);
+
+            return redirect()->back();
+      
     }
 }

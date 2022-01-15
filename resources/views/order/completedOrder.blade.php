@@ -377,7 +377,7 @@
 </div>
 <script>
     $(document).ready(function() {
-
+        $('#heading').html('Completed Orders')
         $(".view_button").click(function() {
 
             order_id = $(this).attr('data_id');
@@ -406,7 +406,7 @@
                     $('#approved_user_name').val(result.approved_user_name);
                     $('#requested_date').val(result.requested_date);
                     $('#approved_date').val(result.approved_date);
-                   
+
                 }
             });
         });

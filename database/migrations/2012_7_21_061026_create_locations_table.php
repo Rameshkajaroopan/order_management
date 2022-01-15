@@ -15,9 +15,8 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->bigInteger('branch_id')->unsigned();
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->string('name');
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

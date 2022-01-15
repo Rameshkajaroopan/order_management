@@ -129,20 +129,20 @@
 </style>
 
 <div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                    <button type="button" class="btn float-right btn-primary add_button " data_id=""> <i class="fas fa-clone mr-2"></i> Add New Location</button>
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="button" class="btn float-right btn-primary add_button " data_id=""> <i class="fas fa-clone mr-2"></i> Add New Location</button>
 
-                    </div>
+          </div>
 
-                  
-                </div>
-            </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="row">
@@ -155,11 +155,6 @@
             <th>ID</th>
 
             <th>Location Name</th>
-            
-            <th>Branch Name</th>
-
-
-
             <th>Actions</th>
           </tr>
           @foreach($locations as $location)
@@ -167,7 +162,6 @@
             <td data-th="ID">{{$location->id}}</td>
 
             <td data-th="Location Name">{{$location->name}}</td>
-            <td data-th="Branch Name">{{$location->branch->name}}</td>
 
             <td data-th="Actions">
               <button type="button" class="btn btn-primary view_button" data_id="{{$location->id}}">Edit</button>
@@ -199,7 +193,7 @@
                   <label>Id</label>
                   <div class="form-group">
                     <input id="Id" type="text" class="form-control modelView" value="" disabled />
-                    <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden  />
+                    <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden />
 
                   </div>
                 </div>
@@ -210,18 +204,6 @@
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <label>Branch</label>
-                  <div class="form-group">
-                    <select id="branch" name="branch_id" class="form-control modelView" required>
-                      @foreach($branches as $branch )
-                      <option value="{{$branch->id}}" >{{$branch->name}}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-               
-               
               </div>
 
               <button id="submit_button" class="btn btn-light update float-right ml-2" type="submit">Update</button>
@@ -237,7 +219,7 @@
 </div>
 <script>
   $(document).ready(function() {
-
+    $('#heading').html('Locations')
     $(".add_button").click(function() {
 
       $('#Id').val('Auto')
@@ -247,14 +229,14 @@
       $('#form').attr('action', "/location");
 
       $('#submit_button').click(function() {
-$(this).submit();
+        $(this).submit();
       });
 
     });
 
 
     $(".view_button").click(function() {
-        $('.update').text("Update")
+      $('.update').text("Update")
 
       branch_id = $(this).attr('data_id');
       $.ajax({
@@ -269,9 +251,6 @@ $(this).submit();
           $('#Id').val(result.id);
           $('#location_name').val(result.name);
           $('#Idvalue').val(result.id);
-          $('#branch').val(result.branch_id);
-
-          
           $('#viewModal').modal('show')
         }
       });
