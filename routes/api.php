@@ -32,7 +32,7 @@ Route::get('/createLogin',  'App\Http\Controllers\mobile\LoginController@createL
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/dashboard',  'App\Http\Controllers\mobile\DashboardController@dashboard');
-
+    Route::get('/profile',  'App\Http\Controllers\mobile\DashboardController@profile');
     Route::get('/newOrder',  'App\Http\Controllers\mobile\OrderController@newOrder');
     Route::get('/sentApprovedOrder',  'App\Http\Controllers\mobile\OrderController@sentApprovedOrder');
     Route::get('/sentApprovedCompletedOrder',  'App\Http\Controllers\mobile\OrderController@sentApprovedCompletedOrder');
@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/createdOrder',  'App\Http\Controllers\mobile\OrderController@createdOrder');
 
     Route::get('/singleOrder',  'App\Http\Controllers\mobile\SingleOrderController@singleOrder');
+    Route::get('/branchLocation',  'App\Http\Controllers\mobile\SingleOrderController@branchLocation');
 
     Route::post('/sendRequest',  'App\Http\Controllers\mobile\ButtonClickController@sendRequest');
     Route::post('/deliverSameBranch',  'App\Http\Controllers\mobile\ButtonClickController@deliverSameBranch');

@@ -46,4 +46,11 @@ class SingleOrderController extends Controller
             'location_status' =>  $singleOrderTransfer->location_status,
         ]);
     }
+    public function branchLocation()
+    {
+        $branches = Branch::get();
+        $locations = Location::get();
+
+        return response()->json(['branches' => $branches, 'locations' => $locations]);
+    }
 }

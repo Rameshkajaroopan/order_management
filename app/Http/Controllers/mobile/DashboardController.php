@@ -77,6 +77,14 @@ class DashboardController extends Controller
             )
             ->count();
 
+        $totalIncomeToday = Order::where('created_branch_id', '=', $branchId)
+            ->whereDate('created_date', Carbon::now()->toDateString())
+            ->sum('total_amount');
+
+        $totalPaidToday = Order::where('created_branch_id', '=', $branchId)
+            ->where('working_status', '=', 'NotStart')
+            ->whereDate('created_date', Carbon::now()->toDateString())
+            ->sum('paid_amount');
 
         return response()->json([
             'NewCount' => $NewCount,
@@ -87,7 +95,14 @@ class DashboardController extends Controller
             'NewCountToday' => $NewCountToday,
             'sentCountToday' => $sentCountToday,
             'receivedCountToday' => $receivedCountToday,
-            'totalCountToday' => $totalCountToday
+            'totalIncomeToday' => $totalIncomeToday,
+            'totalPaidToday' => $totalPaidToday
         ]);
+    }
+
+    public function profile()
+    {
+        $loginUser = Auth::user();
+        return response()->json(['loginUser' => $loginUser]);
     }
 }
