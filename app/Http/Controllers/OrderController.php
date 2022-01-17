@@ -39,10 +39,10 @@ class OrderController extends Controller
                 function ($query)  {
                     return $query
                         ->where('orders.working_status', '=', 'Completed')
-                        ->orWhere('orders.working_status', '=', 'Stuck');
+                        ->orWhere('orders.working_status', '=', 'Stuck')
+                        ->orWhere('orders.working_status', '=', 'Cancel');
                 }
-            )
-            ->orderBy('orders.id');
+            );
 
         if (($from != "") && ($to != "")) {
             $completedOrders =    $completedOrders->whereBetween('orders.created_date', [$from, $to]);
@@ -207,6 +207,7 @@ class OrderController extends Controller
                 'mobile' => $request->mobile,
                 'payment_mode' => $request->payment_mode,
                 'total_amount' =>  $request->total_amount,
+                'paid_amount' =>  $request->paid_amount,
                 'due_date' => $request->due_date,
                 'created_date' =>  $request->created_date
             ]);

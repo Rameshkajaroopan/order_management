@@ -177,6 +177,7 @@
                                 <option value="InProgress" {{$pendingOrder->working_status == "InProgress" ? 'selected':''}}>In Progress</option>
                                 <option value="Stuck" {{$pendingOrder->working_status == "Stuck" ? 'selected':''}}>Stuck</option>
                                 <option value="Completed" {{$pendingOrder->working_status == "Completed" ? 'selected':''}}>Completed</option>
+                                <option value="Cancel" {{$pendingOrder->working_status == "Cancel" ? 'selected':''}}>Cancel</option>
 
                             </select>
                         </td>
@@ -340,91 +341,91 @@
                 <span class="close" id="close" align="right" style="cursor:pointer" onclick="$('#editModal').modal('hide');$('.modelView').val('') ">&times;</span>
                 <div class="card-body">
                     <div class="col-12">
+
                         <div class="row">
 
-                            <div class="row">
+                            <div class="col-md-4 ">
+                                <label>Item</label>
+                                <div class="form-group">
+                                    <input id="editItem" name="Item" type="text" class="form-control modelView" value="" required />
+                                    <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden />
 
-                                <div class="col-md-6 ">
-                                    <label>Item</label>
-                                    <div class="form-group">
-                                        <input id="editItem" name="Item" type="text" class="form-control modelView" value="" required />
-                                        <input id="Idvalue" name="id" type="text" class="form-control modelView" value="" hidden />
-
-                                    </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label>Weight</label>
-                                    <div class="form-group">
-                                        <input id="editweight" name="weight" type="text" class="form-control modelView" value="" required />
-                                    </div>
-                                </div>
-
-
                             </div>
 
-                            <div class="row">
-
-                                <div class="col-md-6 ">
-                                    <label>Total Amount</label>
-                                    <div class="form-group">
-                                        <input id="edittotal_amount" name="total_amount" type="text" class="form-control modelView" value="" required />
-
-                                    </div>
+                            <div class="col-md-4">
+                                <label>Weight</label>
+                                <div class="form-group">
+                                    <input id="editweight" name="weight" type="text" class="form-control modelView" value="" required />
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label>Payment Mode</label>
-                                    <div class="form-group">
-                                        <input id="editpayment_mode" name="payment_mode" type="text" class="form-control modelView" value="" required />
-                                    </div>
-                                </div>
-
-
                             </div>
 
-                            <div class="row">
 
-                                <div class="col-md-6 ">
-                                    <label>Created Date</label>
-                                    <div class="form-group">
-                                        <input id="editcreated_date" name="created_date" type="text" class="form-control modelView" value="" required />
-                                    </div>
+                            <div class="col-md-4">
+                                <label>Total Amount</label>
+                                <div class="form-group">
+                                    <input id="edittotal_amount" name="total_amount" type="text" class="form-control modelView" value="" required />
+
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label>Due Date</label>
-                                    <div class="form-group">
-                                        <input id="editdue_date" name="due_date" type="text" class="form-control modelView" value="" required />
-                                    </div>
-                                </div>
-
-
                             </div>
 
-                            <div class="row">
+                        </div>
 
-                                <div class="col-md-6 ">
-                                    <label>Customer Name</label>
-                                    <div class="form-group">
-                                        <input id="editcustomer_name" name="customer_name" type="text" class="form-control modelView" value="" required />
-                                    </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <label>Paid Amount</label>
+                                <div class="form-group">
+                                    <input id="editpaid_amount" name="paid_amount" type="text" class="form-control modelView" value="" required />
+
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label>Customer Mobile</label>
-                                    <div class="form-group">
-                                        <input id="editcustomer_mobile" name="mobile" type="text" class="form-control modelView" value="" required />
-                                    </div>
-                                </div>
-
-
                             </div>
-                            <div class=" float-right"><button class="btn btn-light update float-right ml-2" type="submit">Update</button>
-                                <button type="button" class="btn btn-primary float-right " onclick="$('#editModal').modal('hide');$('.modelView').val('')">Cancel</button>
+                            <div class="col-md-4">
+                                <label>Payment Mode</label>
+                                <div class="form-group">
+                                    <input id="editpayment_mode" name="payment_mode" type="text" class="form-control modelView" value="" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <label>Created Date</label>
+                                <div class="form-group">
+                                    <input id="editcreated_date" name="created_date" type="text" class="form-control modelView" value="" required />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <label>Due Date</label>
+                                <div class="form-group">
+                                    <input id="editdue_date" name="due_date" type="text" class="form-control modelView" value="" required />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Customer Name</label>
+                                <div class="form-group">
+                                    <input id="editcustomer_name" name="customer_name" type="text" class="form-control modelView" value="" required />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Customer Mobile</label>
+                                <div class="form-group">
+                                    <input id="editcustomer_mobile" name="mobile" type="text" class="form-control modelView" value="" required />
+                                </div>
                             </div>
                         </div>
+
                     </div>
+                    <div class="row float-right">
+                        <button class="btn btn-light update float-right ml-2" type="submit">Update</button>&nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary float-right " onclick="$('#editModal').modal('hide');$('.modelView').val('')">Cancel</button>
+                    </div>
+
+                </div>
             </form>
         </div>
     </div>
@@ -483,6 +484,7 @@
                     $('#editItem').val(result.Item);
                     $('#editweight').val(result.weight);
                     $('#edittotal_amount').val(result.total_amount);
+                    $('#editpaid_amount').val(result.paid_amount);
                     $('#editpayment_mode').val(result.payment_mode);
                     $('#editcreated_date').val(result.created_date);
                     $('#editdue_date').val(result.due_date);

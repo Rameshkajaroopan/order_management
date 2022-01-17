@@ -12,11 +12,12 @@ use App\Models\Branch;
 class LocationController extends Controller
 {
     public function index()
-    {        $branches =  Branch::get();
+    {
+        $branches =  Branch::get();
 
         $locations =  Location::get();
-       
-        return view('location.index', ['locations' => $locations,'branches'=>$branches]);
+
+        return view('location.index', ['locations' => $locations, 'branches' => $branches]);
     }
 
     public function create()
@@ -26,9 +27,9 @@ class LocationController extends Controller
 
     public function store(Request $request)
     {
-        
-       Location::create($request->all());
-        
+
+        Location::create($request->all());
+
 
         return Redirect('/location');
     }
@@ -37,7 +38,7 @@ class LocationController extends Controller
     {
         $location = Location::find($id);
 
-        return view('location.edit')->with('location',$location);
+        return view('location.edit')->with('location', $location);
     }
 
     public function update(Request $request)
@@ -54,10 +55,9 @@ class LocationController extends Controller
         return $locations;
     }
 
-    public function locationView(Request $request){
+    public function locationView(Request $request)
+    {
         $location = Location::find($request->id);;
         return json_encode($location);
-
-        
     }
 }

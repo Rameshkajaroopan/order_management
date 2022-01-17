@@ -79,11 +79,13 @@ class DashboardController extends Controller
 
         $totalIncomeToday = Order::where('created_branch_id', '=', $branchId)
             ->whereDate('created_date', Carbon::now()->toDateString())
+            ->where('working_status','!=','Cancel')
             ->sum('total_amount');
 
         $totalPaidToday = Order::where('created_branch_id', '=', $branchId)
             ->where('working_status', '=', 'NotStart')
             ->whereDate('created_date', Carbon::now()->toDateString())
+            ->where('working_status','!=','Cancel')
             ->sum('paid_amount');
 
         return response()->json([

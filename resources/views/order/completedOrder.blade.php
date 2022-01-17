@@ -176,6 +176,7 @@
                             <select id="working_status" class=" browser-default form-control" name="working_status">
                                 <option value="" {{$working_status == "" ? 'selected':''}}>All</option>
                                 <option value="Stuck" {{$working_status == "Stuck" ? 'selected':''}}>Stuck</option>
+                                <option value="Cancel" {{$working_status == "Cancel" ? 'selected':''}}>Cancel</option>
                                 <option value="Completed" {{$working_status == "Completed" ? 'selected':''}}>Completed</option>
                             </select>
                         </div>
