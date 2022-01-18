@@ -35,6 +35,12 @@
         <p>Completed Orders</p>
       </a>
     </li>
+    <li class="nav-item">
+      <a href="/exceptionalOrder" class="nav-link">
+        <i class="fa fa-window-close nav-icon"></i>
+        <p>Stoped Orders</p>
+      </a>
+    </li>
   </ul>
 </li>
 </br>

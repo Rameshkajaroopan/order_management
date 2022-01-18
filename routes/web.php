@@ -42,8 +42,10 @@ Route::post('/location',  'App\Http\Controllers\LocationController@store')->name
 Route::get('/location/{id}/edit',  'App\Http\Controllers\LocationController@edit')->name('location.edit');
 Route::post('/location/update',  'App\Http\Controllers\LocationController@update')->name('location.update');
 Route::post('/location/delete',  'App\Http\Controllers\LocationController@destroy')->name('location.destroy');
-// get completed orders
+// get completed orders 
 Route::get('/completedOrder',  'App\Http\Controllers\OrderController@completedOrder')->name('order.completedOrder');
+Route::get('/exceptionalOrder',  'App\Http\Controllers\OrderController@exceptionalOrder')->name('order.exceptionalOrder');
+
 // get pending orders
 Route::get('/pendingOrder',  'App\Http\Controllers\OrderController@pendingOrder')->name('order.pendingOrder');
 Route::get('/pendingInProgressOrder',  'App\Http\Controllers\OrderController@pendingInProgressOrder')->name('order.pendingInProgressOrder');

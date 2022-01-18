@@ -18,6 +18,63 @@ class OrderController extends Controller
     {
       
         $branch_status = $request->branch_status;
+       
+
+        if ($request->input("from")) {
+            $from = $request->from;
+        } else {
+            $from = "";
+        }
+        if ($request->input("to")) {
+            $to = $request->input("to");
+        } else {
+            $to = "";
+        }
+
+
+        $completedOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+            ->join('users', 'orders.created_user_id', '=', 'users.id')
+            ->join('branches', 'orders.created_branch_id', '=', 'branches.id')
+            ->where('orders.working_status', '=', 'Completed');
+
+        if (($from != "") && ($to != "")) {
+            $completedOrders =    $completedOrders->whereBetween('orders.created_date', [$from, $to]);
+        } elseif($from != "" && $to == "") {
+            $completedOrders =    $completedOrders->whereDate('orders.created_date',$from);
+        }else{
+            $completedOrders =    $completedOrders->whereDate('orders.updated_at',Carbon::now()->toDateString());
+        }
+
+        if ($branch_status != "") {
+            $completedOrders =   $completedOrders->where('orders.created_branch_id', '=', $branch_status);
+        }
+        // if ($working_status != "") {
+        //     $completedOrders =   $completedOrders->where('orders.working_status', '=', $working_status);
+        // }
+
+        $completedOrders =  $completedOrders->orderBy('orders.id', 'desc')
+            ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
+            ->paginate(10);
+
+        $branches =  Branch::get();
+
+        $users = User::get();
+        $locations = Location::get();
+
+        return view('order.completedOrder')
+            ->with('completedOrders', $completedOrders)
+            ->with('branches', $branches)
+            ->with('users', $users)
+            ->with('locations', $locations)
+            ->with('from', $from)
+            ->with('to', $to)
+            ->with('branch_status', $branch_status);
+    }
+
+    public function exceptionalOrder(Request $request)
+    {
+      
+        $branch_status = $request->branch_status;
         $working_status = $request->working_status;
 
         if ($request->input("from")) {
@@ -38,8 +95,7 @@ class OrderController extends Controller
             ->where(
                 function ($query)  {
                     return $query
-                        ->where('orders.working_status', '=', 'Completed')
-                        ->orWhere('orders.working_status', '=', 'Stuck')
+                        ->where('orders.working_status', '=', 'Stuck')
                         ->orWhere('orders.working_status', '=', 'Cancel');
                 }
             );
@@ -49,7 +105,7 @@ class OrderController extends Controller
         } elseif($from != "" && $to == "") {
             $completedOrders =    $completedOrders->whereDate('orders.created_date',$from);
         }else{
-            $completedOrders =    $completedOrders->whereDate('orders.created_date',Carbon::now()->toDateString());
+            $completedOrders =    $completedOrders->whereDate('orders.updated_at',Carbon::now()->toDateString());
         }
 
         if ($branch_status != "") {
@@ -68,7 +124,7 @@ class OrderController extends Controller
         $users = User::get();
         $locations = Location::get();
 
-        return view('order.completedOrder')
+        return view('order.exceptionalOrder')
             ->with('completedOrders', $completedOrders)
             ->with('branches', $branches)
             ->with('users', $users)
