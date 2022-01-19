@@ -16,10 +16,8 @@ class OrderController extends Controller
 {
     public function completedOrder(Request $request)
     {
-      
         $branch_status = $request->branch_status;
        
-
         if ($request->input("from")) {
             $from = $request->from;
         } else {
@@ -30,7 +28,6 @@ class OrderController extends Controller
         } else {
             $to = "";
         }
-
 
         $completedOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->join('users', 'orders.created_user_id', '=', 'users.id')
@@ -48,9 +45,6 @@ class OrderController extends Controller
         if ($branch_status != "") {
             $completedOrders =   $completedOrders->where('orders.created_branch_id', '=', $branch_status);
         }
-        // if ($working_status != "") {
-        //     $completedOrders =   $completedOrders->where('orders.working_status', '=', $working_status);
-        // }
 
         $completedOrders =  $completedOrders->orderBy('orders.id', 'desc')
             ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')

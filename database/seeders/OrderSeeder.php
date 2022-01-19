@@ -25,7 +25,7 @@ class OrderSeeder extends Seeder
         foreach (range(1, 10) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' . $index,
+                'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),
@@ -45,7 +45,7 @@ class OrderSeeder extends Seeder
         foreach (range(11, 17) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' . $index,
+                'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),
@@ -65,7 +65,7 @@ class OrderSeeder extends Seeder
         foreach (range(11, 17) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' . $index,
+                'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),
@@ -86,7 +86,7 @@ class OrderSeeder extends Seeder
         foreach (range(18, 23) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' .$index,
+                'serial_number' => 'order-' .$index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),
@@ -106,7 +106,7 @@ class OrderSeeder extends Seeder
         foreach (range(24, 27) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' . $index,
+                'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),
@@ -127,7 +127,7 @@ class OrderSeeder extends Seeder
         foreach (range(28, 30) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' . $index,
+                'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),
@@ -148,7 +148,7 @@ class OrderSeeder extends Seeder
         foreach (range(31, 34) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' . $index,
+                'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),
@@ -168,7 +168,7 @@ class OrderSeeder extends Seeder
         foreach (range(35, 40) as $index) {
 
             DB::table('orders')->insert([
-                'serial_number' => 'invoice->' . $index,
+                'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
                 'mobile' => str::random(10),
                 'Item' => Str::random(10),

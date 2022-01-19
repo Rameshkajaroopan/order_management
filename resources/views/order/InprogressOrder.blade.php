@@ -275,10 +275,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <label>Request Status</label>
                                 <div class="form-group">
                                     <input id="request_status" type="text" class="form-control modelView" value="" disabled />
+                                </div>
+                            </div> -->
+                            <div class="col-md-4">
+                                <label>Requested User</label>
+                                <div class="form-group">
+                                    <input id="requested_user_name" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
@@ -286,28 +292,21 @@
 
                         <div class="row">
 
-                            <div class="col-md-3">
-                                <label>Requested User</label>
-                                <div class="form-group">
-                                    <input id="requested_user_name" type="text" class="form-control modelView" value="" disabled />
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label>Approved User</label>
                                 <div class="form-group">
                                     <input id="approved_user_name" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label>Request Date</label>
                                 <div class="form-group">
                                     <input id="requested_date" type="text" class="form-control modelView" value="" disabled />
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label>Approved Date</label>
                                 <div class="form-group">
                                     <input id="approved_date" type="text" class="form-control modelView" value="" disabled />
@@ -446,7 +445,7 @@
                     $('#created_user_name').val(result.created_user_name);
                     $('#address').val(result.address);
                     $('#approved_branch_name').val(result.approved_branch_name);
-                    $('#locationStatus').val(result.location_status);
+                    // $('#locationStatus').val(result.location_status);
                     $('#request_status').val(result.request_status);
                     $('#requested_user_name').val(result.requested_user_name);
                     $('#approved_user_name').val(result.approved_user_name);
@@ -518,7 +517,6 @@
                         working_status: working_status,
                     },
                     success: function(result) {
-                        console.log(result);
                         location.reload();
                     }
 

@@ -170,7 +170,7 @@
                         </div>
                     </div>
                     &nbsp;
-                
+
                     <div class="col-md-3">
                         <div class="form-group ">
                             <strong>Created Branch</strong>
@@ -183,10 +183,17 @@
                         </div>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         <div class="form-group ">
                             <br>
                             <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-md-1">
+                        <br>
+                        <div class="form-group ">
+                            <a href="export-csv" target="_blank" class="btn btn-primary me-1">Export</a>
                         </div>
                     </div>
                 </form>
