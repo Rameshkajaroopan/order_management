@@ -26,9 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-
-
+        
         $orders = Order::orderBy('id', 'desc')->take(5)->get();
         $allorders = Order::all();
         $total_amount = Order::whereDate('created_date',Carbon::now())->where('working_status','!=','Cancel')->sum('total_amount');

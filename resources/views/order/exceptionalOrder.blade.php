@@ -170,16 +170,7 @@
                         </div>
                     </div>
                     &nbsp;
-                    <div class="col-md-3">
-                        <div class="form-group ">
-                            <strong>Working Status</strong>
-                            <select id="working_status" class=" browser-default form-control" name="working_status">
-                                <option value="" {{$working_status == "" ? 'selected':''}}>All</option>
-                                <option value="Stuck" {{$working_status == "Stuck" ? 'selected':''}}>Stuck</option>
-                                <option value="Cancel" {{$working_status == "Cancel" ? 'selected':''}}>Cancel</option>
-                            </select>
-                        </div>
-                    </div>
+                  
 
                     <div class="col-md-3">
                         <div class="form-group ">
@@ -377,7 +368,7 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#heading').html('Stoped Orders')
+        $('#heading').html('Cancel Orders')
         $(".view_button").click(function() {
 
             order_id = $(this).attr('data_id');

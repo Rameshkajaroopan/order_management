@@ -30,6 +30,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a href="/stuckOrder" class="nav-link">
+        <i class="fa fa-pause nav-icon"></i>
+        <p>Stuck Orders</p>
+      </a>
+    </li>
+    <li class="nav-item">
       <a href="/completedOrder" class="nav-link">
         <i class="fa fa-battery-full nav-icon"></i>
         <p>Completed Orders</p>
@@ -37,13 +43,14 @@
     </li>
     <li class="nav-item">
       <a href="/exceptionalOrder" class="nav-link">
-        <i class="fa fa-window-close nav-icon"></i>
-        <p>Stoped Orders</p>
+        <i class="fa fa-window-close nav-icon" ></i>
+        <p>Cancel Orders</p>
       </a>
     </li>
   </ul>
 </li>
 </br>
+
 <li class="nav-item">
   <a href="{{route('user.index')}}" class="nav-link">
     <i class="nav-icon fas fa-user"></i>
@@ -54,7 +61,6 @@
     </p>
   </a>
 </li>
-
 
 </br>
 <li class="nav-item">

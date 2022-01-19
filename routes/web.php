@@ -50,6 +50,7 @@ Route::group(['middleware' => ['is_admin']], function () {
 
     // get pending orders
     Route::get('/pendingOrder',  'App\Http\Controllers\OrderController@pendingOrder')->name('order.pendingOrder');
+    Route::get('/stuckOrder',  'App\Http\Controllers\OrderController@stuckOrder')->name('order.stuckOrder');
     Route::get('/pendingInProgressOrder',  'App\Http\Controllers\OrderController@pendingInProgressOrder')->name('order.pendingInProgressOrder');
     Route::get('/viewOrder',  'App\Http\Controllers\OrderController@viewOrder')->name('order.viewOrder');
     Route::get('/editOrder',  'App\Http\Controllers\OrderController@editOrder')->name('order.editOrder');

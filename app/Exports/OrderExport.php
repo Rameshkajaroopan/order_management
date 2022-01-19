@@ -45,6 +45,11 @@ class OrderExport implements FromCollection, WithCustomCsvSettings, WithHeadings
                 $event->sheet->getDelegate()->getStyle('A1:N1')
                     ->getFont()
                     ->setBold(true);
+
+                    // $event->sheet->setWidth(array(
+                    //     'A'     =>  100,
+                    //     'B'     =>  10
+                    // ));   
             }
         ];
     }

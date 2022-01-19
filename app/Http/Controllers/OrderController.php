@@ -69,7 +69,6 @@ class OrderController extends Controller
     {
       
         $branch_status = $request->branch_status;
-        $working_status = $request->working_status;
 
         if ($request->input("from")) {
             $from = $request->from;
@@ -105,9 +104,7 @@ class OrderController extends Controller
         if ($branch_status != "") {
             $completedOrders =   $completedOrders->where('orders.created_branch_id', '=', $branch_status);
         }
-        if ($working_status != "") {
-            $completedOrders =   $completedOrders->where('orders.working_status', '=', $working_status);
-        }
+       
 
         $completedOrders =  $completedOrders->orderBy('orders.id', 'desc')
             ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
@@ -125,7 +122,6 @@ class OrderController extends Controller
             ->with('locations', $locations)
             ->with('from', $from)
             ->with('to', $to)
-            ->with('working_status', $working_status)
             ->with('branch_status', $branch_status);
     }
 
@@ -264,5 +260,38 @@ class OrderController extends Controller
 
             return redirect()->back();
       
+    }
+
+    public function stuckOrder(Request $request)
+    {
+
+        $branch_status = $request->branch_status;
+        // $location_status = $request->location_status;
+
+        $pendingOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
+            ->join('users', 'orders.created_user_id', '=', 'users.id')
+            ->join('branches', 'orders.created_branch_id', '=', 'branches.id')
+            ->Where('orders.working_status', '=', 'Stuck');
+
+        if ($branch_status != "") {
+            $pendingOrders =   $pendingOrders->where('orders.created_branch_id', '=', $branch_status);
+        }
+      
+
+        $pendingOrders =  $pendingOrders->orderBy('orders.id', 'desc')
+            ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
+            ->paginate(20);
+
+        $branches =  Branch::get();
+
+        $users = User::get();
+        $locations = Location::get();
+
+        return view('order.stuckOrder')
+            ->with('pendingOrders', $pendingOrders)
+            ->with('branches', $branches)
+            ->with('users', $users)
+            ->with('locations', $locations)
+            ->with('branch_status', $branch_status);
     }
 }
