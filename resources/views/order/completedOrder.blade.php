@@ -156,22 +156,20 @@
 
                 <form action="/completedOrder" method="GET" class="row m-0">
 
-                    <div class="col-md-2.5">
+                    <div class="col-md-2 mr-2">
                         <div class="form-group">
                             <strong>From</strong>
                             <input type="date" name="from" id="from" value="{{$from}}" class="form-control" required>
                         </div>
                     </div>
-                    &nbsp;&nbsp;&nbsp;
-                    <div class="col-md-2.5">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <strong>To</strong>
                             <input type="date" name="to" id="to" value="{{$to}}" class="form-control">
                         </div>
                     </div>
-                    &nbsp;
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group ">
                             <strong>Created Branch</strong>
                             <select id="branch_status" name="branch_status" class=" browser-default form-control">
@@ -183,17 +181,16 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group ">
                             <br>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="col-md-1">
+                    <div class="col-md-3 col-sm-12 col-12 ">
                         <br>
-                        <div class="form-group ">
-                            <a href="export-csv" target="_blank" class="btn btn-primary me-1">Export</a>
+                        <div class="form-group float-right">
+                            <a href="export-csv" target="_blank" class="btn btn-light me-1">Export Orders</a>
                         </div>
                     </div>
                 </form>

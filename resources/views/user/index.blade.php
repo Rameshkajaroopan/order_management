@@ -277,8 +277,8 @@
                   <label>Role</label>
                   <div class="form-group">
                     <select id="role" name="role" class="form-control modelView" selected="selected" required>
-                      <option value="user">User</option>
-                      <option value="superadmin">Super Admin</option>
+                      <option value="user" >User</option>
+                      <option value="super_user">Super User</option>
                       <option value="admin">Admin</option>
 
                     </select>
