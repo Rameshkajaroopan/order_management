@@ -17,7 +17,6 @@ class SingleOrderController extends Controller
     public function singleOrder(Request $request)
     {
         $serial_number = $request->input('serial_number');
-        $order_page = $request->input('order_page');
 
         $orderId =  Order::where('serial_number', '=', $serial_number)->value('id');
         $singleOrderTransferId = OrderTransfer::where('order_id', '=', $orderId)->value('id');
