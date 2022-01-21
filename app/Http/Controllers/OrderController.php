@@ -129,7 +129,6 @@ class OrderController extends Controller
     {
 
         $branch_status = $request->branch_status;
-        // $location_status = $request->location_status;
 
         $pendingOrders = Order::leftjoin('order_transfers', 'orders.id', '=', 'order_transfers.order_id')
             ->join('users', 'orders.created_user_id', '=', 'users.id')
@@ -139,9 +138,7 @@ class OrderController extends Controller
         if ($branch_status != "") {
             $pendingOrders =   $pendingOrders->where('orders.created_branch_id', '=', $branch_status);
         }
-        // if ($location_status != "") {
-        //     $pendingOrders =   $pendingOrders->where('orders.working_status', '=', $location_status);
-        // }
+       
 
         $pendingOrders =  $pendingOrders->orderBy('orders.id', 'desc')
             ->select('orders.id as Oid', 'users.id as Uid', 'branches.id as Bid', 'order_transfers.Id as OTid', 'orders.*', 'order_transfers.*', 'branches.name as branchName')
