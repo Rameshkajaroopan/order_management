@@ -22,28 +22,69 @@ class SingleOrderController extends Controller
         $singleOrderTransferId = OrderTransfer::where('order_id', '=', $orderId)->value('id');
 
         $singleOrder = Order::find($orderId);
-        $singleOrderTransfer = OrderTransfer::find($singleOrderTransferId);
+      
+        $created_branch_id =    $singleOrder->created_branch_id;
+       
+        $created_branch_name = Branch::where('id', $created_branch_id)->value('name');
+     
+        $created_user_id =  $singleOrder->created_user_id;
+        $created_user_name = User::where('id', $created_user_id)->value('first_name');
 
+        if ($singleOrderTransferId) {
+            $singleOrderTransfer = OrderTransfer::find($singleOrderTransferId);
 
-        return response()->json([
-            'cutomer_name' => $singleOrder->customer_name,
-            'mobile' => $singleOrder->mobile,
-            'Item' => $singleOrder->Item,
-            'weight' => $singleOrder->weight,
-            'total_amount' => $singleOrder->total_amount,
-            'paid_amount' => $singleOrder->paid_amount,
-            'created_branch_name' => $singleOrder->branch->name,
-            'created_user_name' => $singleOrder->user->first_name,
-            'address' => $singleOrder->address,
-            'working_status' =>  $singleOrder->working_status,
-            'requested_branch_id' =>   $singleOrderTransfer->requestBranch->name,
-            'approved_branch_id ' => $singleOrderTransfer->approvedBranch->name,
-            'requested_user_id ' => $singleOrderTransfer->requestUser->first_name,
-            'approved_user_id ' => $singleOrderTransfer->approvedUser->first_name,
-            'requested_date' =>  $singleOrderTransfer->requested_date,
-            'approved_date' =>  $singleOrderTransfer->approved_date,
-            'location_status' =>  $singleOrderTransfer->location_status,
-        ]);
+            $requested_branch_id =    $singleOrderTransfer->requested_branch_id;
+            $requested_branch_name = Branch::where('id', $requested_branch_id)->value('name');
+
+            $approved_branch_id =    $singleOrderTransfer->approved_branch_id;
+            $approved_branch_name = Branch::where('id', $approved_branch_id)->value('name');
+
+            $requested_user_id =    $singleOrderTransfer->requested_user_id;
+            $requested_user_name = User::where('id', $requested_user_id)->value('first_name');
+
+            $approved_user_id =    $singleOrderTransfer->approved_user_id;
+            $approved_user_name = User::where('id', $approved_user_id)->value('first_name');
+
+            return response()->json([
+                'cutomer_name' => $singleOrder->customer_name,
+                'mobile' => $singleOrder->mobile,
+                'Item' => $singleOrder->Item,
+                'weight' => $singleOrder->weight,
+                'total_amount' => $singleOrder->total_amount,
+                'paid_amount' => $singleOrder->paid_amount,
+                'created_branch_name' =>  $created_branch_name,
+                'created_user_name' => $created_user_name,
+                'address' => $singleOrder->address,
+                'working_status' =>  $singleOrder->working_status,
+                'requested_branch_name' =>   $requested_branch_name,
+                'approved_branch_name ' => $approved_branch_name,
+                'requested_user_name ' => $requested_user_name,
+                'approved_user_name' => $approved_user_name,
+                'requested_date' =>  $singleOrderTransfer->requested_date,
+                'approved_date' =>  $singleOrderTransfer->approved_date,
+                'location_status' =>  $singleOrderTransfer->location_status,
+            ]);
+        } else {
+            return response()->json([
+                'cutomer_name' => $singleOrder->customer_name,
+                'mobile' => $singleOrder->mobile,
+                'Item' => $singleOrder->Item,
+                'weight' => $singleOrder->weight,
+                'total_amount' => $singleOrder->total_amount,
+                'paid_amount' => $singleOrder->paid_amount,
+                'created_branch_name' =>  $created_branch_name,
+                'created_user_name' => $created_user_name,
+                'address' => $singleOrder->address,
+                'working_status' =>  $singleOrder->working_status,
+                'requested_branch_name' =>   '',
+                'approved_branch_name ' => '',
+                'requested_user_name ' => '',
+                'approved_user_name' =>'',
+                'requested_date' => '',
+                'approved_date' => '',
+                'location_status' => '',
+            ]);
+        }
     }
     public function branchLocation()
     {
