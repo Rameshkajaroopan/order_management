@@ -25,10 +25,11 @@ class SingleOrderController extends Controller
         $singleOrder = Order::find($orderId);
         $singleOrderTransfer = OrderTransfer::find($singleOrderTransferId);
 
-
+      
         $created_branch_id =    $singleOrder->created_branch_id;
+       
         $created_branch_name = Branch::where('id', $created_branch_id)->value('name');
-
+     
         $created_user_id =  $singleOrder->created_user_id;
         $created_user_name = User::where('id', $created_user_id)->value('first_name');
 
