@@ -91,7 +91,7 @@ class ButtonClickController extends Controller
         $serial_number = $request->serial_number;
 
         $searOrder = Order::where('serial_number','like', "%$serial_number%")
-        ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name')
+        ->select('orders.serial_number as serial_number', 'orders.item as item', 'orders.customer_name as customer_name', 'orders.created_date as created_date', 'orders.due_date as due_date')
         ->get();
 
         return response()->json([ 'searOrder' =>  $searOrder]);
