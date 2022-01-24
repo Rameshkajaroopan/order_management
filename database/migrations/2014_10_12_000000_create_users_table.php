@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('role');
             $table->string('mobile');
             $table->string('password');
-            $table->bigInteger('branch_id')->unsigned();
+            $table->bigInteger('branch_id')->unsigned()->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->rememberToken()->nullable();
             $table->timestamps();

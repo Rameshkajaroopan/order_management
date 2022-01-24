@@ -22,8 +22,7 @@ class OrderSeeder extends Seeder
         $working_status = ['NotStart', 'InProgress', 'Stuck', 'Completed'];
 
 
-        foreach (range(1, 10) as $index) {
-
+        foreach (range(1, 5) as $index) {
             DB::table('orders')->insert([
                 'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
@@ -32,18 +31,17 @@ class OrderSeeder extends Seeder
                 'weight' => Str::random(10),
                 'total_amount' =>  rand(100, 500),
                 'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
+                'payment_mode' =>"Cash",
                 'created_date' => Carbon::now(),
                 'due_date' => Carbon::now(),
                 'created_branch_id' => 1,
                 'created_user_id' => 1,
-                'current_location' => 'A',
+                'current_location' => 'Branch1',
                 'address' =>  Str::random(10),
-                'working_status' => 'InProgress'
+                'working_status' => 'NotStart'
             ]);
         }
-        foreach (range(11, 17) as $index) {
-
+        foreach (range(6, 20) as $index) {
             DB::table('orders')->insert([
                 'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
@@ -52,18 +50,95 @@ class OrderSeeder extends Seeder
                 'weight' => Str::random(10),
                 'total_amount' =>  rand(100, 500),
                 'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
+                'payment_mode' =>"Cash",
+                'created_date' => Carbon::now(),
+                'due_date' => Carbon::now(),
+                'created_branch_id' => 1,
+                'created_user_id' => 1,
+                'current_location' => 'Branch1',
+                'address' =>  Str::random(10),
+                'working_status' => 'InProgress'
+            ]);
+        }
+        foreach (range(21, 25) as $index) {
+            DB::table('orders')->insert([
+                'serial_number' => 'order-' . $index,
+                'customer_name' => Str::random(10),
+                'mobile' => str::random(10),
+                'Item' => Str::random(10),
+                'weight' => Str::random(10),
+                'total_amount' =>  rand(100, 500),
+                'paid_amount' => rand(50, 100),
+                'payment_mode' =>"Cash",
+                'created_date' => Carbon::now(),
+                'due_date' => Carbon::now(),
+                'created_branch_id' => 1,
+                'created_user_id' => 1,
+                'current_location' => 'Branch1',
+                'address' =>  Str::random(10),
+                'working_status' => 'Stuck'
+            ]);
+        }
+        foreach (range(26, 30) as $index) {
+            DB::table('orders')->insert([
+                'serial_number' => 'order-' . $index,
+                'customer_name' => Str::random(10),
+                'mobile' => str::random(10),
+                'Item' => Str::random(10),
+                'weight' => Str::random(10),
+                'total_amount' =>  rand(100, 500),
+                'paid_amount' => rand(50, 100),
+                'payment_mode' =>"Cash",
+                'created_date' => Carbon::now(),
+                'due_date' => Carbon::now(),
+                'created_branch_id' => 1,
+                'created_user_id' => 1,
+                'current_location' => 'Branch1',
+                'address' =>  Str::random(10),
+                'working_status' => 'Completed'
+            ]);
+        }
+        
+        //branch 2
+        foreach (range(31, 35) as $index) {
+            DB::table('orders')->insert([
+                'serial_number' => 'order-' . $index,
+                'customer_name' => Str::random(10),
+                'mobile' => str::random(10),
+                'Item' => Str::random(10),
+                'weight' => Str::random(10),
+                'total_amount' =>  rand(100, 500),
+                'paid_amount' => rand(50, 100),
+                'payment_mode' =>"Card",
                 'created_date' => Carbon::now(),
                 'due_date' => Carbon::now(),
                 'created_branch_id' => 2,
                 'created_user_id' => 2,
-                'current_location' => 'B',
+                'current_location' => 'Branch2',
+                'address' =>  Str::random(10),
+                'working_status' => 'NotStart'
+            ]);
+        }
+        foreach (range(36, 50) as $index) {
+            DB::table('orders')->insert([
+                'serial_number' => 'order-' . $index,
+                'customer_name' => Str::random(10),
+                'mobile' => str::random(10),
+                'Item' => Str::random(10),
+                'weight' => Str::random(10),
+                'total_amount' =>  rand(100, 500),
+                'paid_amount' => rand(50, 100),
+                'payment_mode' =>"Card",
+                'created_date' => Carbon::now(),
+                'due_date' => Carbon::now(),
+                'created_branch_id' => 2,
+                'created_user_id' => 2,
+                'current_location' => 'Branch2',
                 'address' =>  Str::random(10),
                 'working_status' => 'InProgress'
             ]);
         }
-        foreach (range(11, 17) as $index) {
-
+        foreach (range(51, 55) as $index) {
             DB::table('orders')->insert([
                 'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
@@ -72,60 +147,17 @@ class OrderSeeder extends Seeder
                 'weight' => Str::random(10),
                 'total_amount' =>  rand(100, 500),
                 'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
-                'created_date' => Carbon::now(),
-                'due_date' => Carbon::now(),
-                'created_branch_id' => 3,
-                'created_user_id' => 3,
-                'current_location' => 'C',
-                'address' =>  Str::random(10),
-                'working_status' => 'InProgress',
-            ]);
-        }
-
-        foreach (range(18, 23) as $index) {
-
-            DB::table('orders')->insert([
-                'serial_number' => 'order-' .$index,
-                'customer_name' => Str::random(10),
-                'mobile' => str::random(10),
-                'Item' => Str::random(10),
-                'weight' => Str::random(10),
-                'total_amount' =>  rand(100, 500),
-                'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
-                'created_date' => Carbon::now(),
-                'due_date' => Carbon::now(),
-                'created_branch_id' => 1,
-                'created_user_id' => 1,
-                'current_location' => 'C',
-                'address' =>  Str::random(10),
-                'working_status' => 'InProgress',
-            ]);
-        }
-        foreach (range(24, 27) as $index) {
-
-            DB::table('orders')->insert([
-                'serial_number' => 'order-' . $index,
-                'customer_name' => Str::random(10),
-                'mobile' => str::random(10),
-                'Item' => Str::random(10),
-                'weight' => Str::random(10),
-                'total_amount' =>  rand(100, 500),
-                'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
+                'payment_mode' =>"Cash",
                 'created_date' => Carbon::now(),
                 'due_date' => Carbon::now(),
                 'created_branch_id' => 2,
-                'created_user_id' => rand(1, 6),
-                'current_location' => 'A',
+                'created_user_id' => 2,
+                'current_location' => 'Branch2',
                 'address' =>  Str::random(10),
-                'working_status' => 'Completed',
+                'working_status' => 'Stuck'
             ]);
         }
-
-        foreach (range(28, 30) as $index) {
-
+        foreach (range(56, 60) as $index) {
             DB::table('orders')->insert([
                 'serial_number' => 'order-' . $index,
                 'customer_name' => Str::random(10),
@@ -134,56 +166,17 @@ class OrderSeeder extends Seeder
                 'weight' => Str::random(10),
                 'total_amount' =>  rand(100, 500),
                 'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
+                'payment_mode' =>"Card",
                 'created_date' => Carbon::now(),
                 'due_date' => Carbon::now(),
-                'created_branch_id' => 3,
-                'created_user_id' => rand(1, 6),
-                'current_location' => 'C',
+                'created_branch_id' => 2,
+                'created_user_id' => 2,
+                'current_location' => 'Branch2',
                 'address' =>  Str::random(10),
-                'working_status' => 'Completed',
+                'working_status' => 'Completed'
             ]);
         }
 
-        foreach (range(31, 34) as $index) {
-
-            DB::table('orders')->insert([
-                'serial_number' => 'order-' . $index,
-                'customer_name' => Str::random(10),
-                'mobile' => str::random(10),
-                'Item' => Str::random(10),
-                'weight' => Str::random(10),
-                'total_amount' =>  rand(100, 500),
-                'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
-                'created_date' => Carbon::now(),
-                'due_date' => Carbon::now(),
-                'created_branch_id' => 1,
-                'created_user_id' => rand(1, 6),
-                'current_location' => 'A',
-                'address' =>  Str::random(10),
-                'working_status' => 'Stuck',
-            ]);
-        }
-        foreach (range(35, 40) as $index) {
-
-            DB::table('orders')->insert([
-                'serial_number' => 'order-' . $index,
-                'customer_name' => Str::random(10),
-                'mobile' => str::random(10),
-                'Item' => Str::random(10),
-                'weight' => Str::random(10),
-                'total_amount' =>  rand(100, 500),
-                'paid_amount' => rand(50, 100),
-                'payment_mode' => Str::random(10),
-                'created_date' => Carbon::now(),
-                'due_date' => Carbon::now(),
-                'created_branch_id' => 1,
-                'created_user_id' => rand(1, 6),
-                'current_location' => 'A',
-                'address' =>  Str::random(10),
-                'working_status' => 'NotStart',
-            ]);
-        }
+       
     }
 }

@@ -15,8 +15,9 @@ class UserController extends Controller
     public function index(Request $request )
     {
         $branch_status = $request->branch_status;
-        $users = User::get();
         $branches = Branch::all();
+        $users =  User::leftjoin('branches','users.branch_id','=','branches.id')->select('users.*','branches.name as name')->get();
+      
         return view('user.index')->with('users',$users)->with('branches',$branches);
     }
 

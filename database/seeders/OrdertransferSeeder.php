@@ -23,67 +23,108 @@ class OrdertransferSeeder extends Seeder
     public function run()
     {
 
-        foreach (range(1, 10) as $index) {
+        foreach (range(6, 10) as $index) {
             OrderTransfer::create([
-
                 'requested_date' => Carbon::now(),
-                'order_id' => rand(1, 10),
+                'order_id' => $index,
                 'requested_branch_id' =>  1,
                 'approved_branch_id' => 2,
                 'requested_user_id' => 1,
                 'location_status' => 'InTransit',
                 'request_status' => 'NotApproved',
-
             ]);
         }
 
-        foreach (range(11, 20) as $index) {
-            OrderTransfer::create([
-
-                'requested_date' => Carbon::now(),
-                'order_id' => rand(11, 20),
-                'requested_branch_id' => 1,
-                'approved_branch_id' => 2,
-                'requested_user_id' => 1,
-                'approved_user_id' => 2,
-                'location_status' => 'location2',
-                'approved_date' => Carbon::now(),
-                'request_status' => 'Approved',
-
-            ]);
-        }
-
-        foreach (range(21, 30) as $index) {
+        foreach (range(11, 15) as $index) {
             OrderTransfer::create([
                 'requested_date' => Carbon::now(),
-                'order_id' => rand(21, 28),
-                'requested_branch_id' => 1,
-                'approved_branch_id' =>2,
-                'requested_user_id' => 1,
-                'approved_user_id' => 2,
-                'location_status' => 'B',
-                'approved_date' => Carbon::now(),
-                'request_status' => 'Approved',
-            ]);
-        }
-
-
-        foreach (range(31, 33) as $index) {
-            OrderTransfer::create([
-
-                'requested_date' => Carbon::now(),
-                'order_id' => rand(31, 33),
+                'order_id' => $index,
                 'requested_branch_id' =>  1,
                 'approved_branch_id' => 2,
                 'requested_user_id' => 1,
-                'approved_user_id' => 3,
-                'location_status' => 'C',
-                'approved_date' => Carbon::now(),
+                'location_status' => 'Branch2',
                 'request_status' => 'Approved',
-
+                'approved_date' => Carbon::now(),
             ]);
         }
 
-       
+        foreach (range(16, 20) as $index) {
+            OrderTransfer::create([
+                'requested_date' => Carbon::now(),
+                'order_id' => $index,
+                'requested_branch_id' =>  1,
+                'approved_branch_id' => 2,
+                'requested_user_id' => 1,
+                'location_status' => 'Location2',
+                'request_status' => 'Approved',
+                'approved_date' => Carbon::now(),
+            ]);
+        }
+
+        foreach (range(26, 30) as $index) {
+            OrderTransfer::create([
+                'requested_date' => Carbon::now(),
+                'order_id' => $index,
+                'requested_branch_id' =>  1,
+                'approved_branch_id' => 2,
+                'requested_user_id' => 1,
+                'location_status' => 'Location2',
+                'request_status' => 'Approved',
+                'approved_date' => Carbon::now(),
+            ]);
+        }
+
+        //next branch
+
+        foreach (range(36, 40) as $index) {
+            OrderTransfer::create([
+                'requested_date' => Carbon::now(),
+                'order_id' => $index,
+                'requested_branch_id' =>  2,
+                'approved_branch_id' => 1,
+                'requested_user_id' => 2,
+                'location_status' => 'InTransit',
+                'request_status' => 'NotApproved',
+            ]);
+        }
+
+        foreach (range(41, 45) as $index) {
+            OrderTransfer::create([
+                'requested_date' => Carbon::now(),
+                'order_id' => $index,
+                'requested_branch_id' =>  2,
+                'approved_branch_id' => 1,
+                'requested_user_id' => 2,
+                'location_status' => 'Branch1',
+                'request_status' => 'Approved',
+                'approved_date' => Carbon::now(),
+            ]);
+        }
+
+        foreach (range(46, 50) as $index) {
+            OrderTransfer::create([
+                'requested_date' => Carbon::now(),
+                'order_id' => $index,
+                'requested_branch_id' =>  2,
+                'approved_branch_id' => 1,
+                'requested_user_id' => 2,
+                'location_status' => 'Location1',
+                'request_status' => 'Approved',
+                'approved_date' => Carbon::now(),
+            ]);
+        }
+
+        foreach (range(56, 60) as $index) {
+            OrderTransfer::create([
+                'requested_date' => Carbon::now(),
+                'order_id' => $index,
+                'requested_branch_id' =>  2,
+                'approved_branch_id' => 1,
+                'requested_user_id' => 2,
+                'location_status' => 'Location2',
+                'request_status' => 'Approved',
+                'approved_date' => Carbon::now(),
+            ]);
+        }
     }
 }

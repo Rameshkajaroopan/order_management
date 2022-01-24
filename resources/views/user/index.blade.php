@@ -177,7 +177,7 @@
             <td data-th="Phone">{{$user->mobile}}</td>
 
 
-            <td data-th="Branch">{{$user->branch->name}}</td>
+            <td data-th="Branch">{{$user->name}}</td>
             <td data-th="Role">{{$user->role}}</td>
 
 
@@ -256,12 +256,12 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label>Branch</label>
+                  <label>Role</label>
                   <div class="form-group">
-                    <select id="branch" name="branch_id" class="form-control modelView" required>
-                      @foreach($branches as $branch )
-                      <option value="{{$branch->id}}" {{$branch->id == "$user->branch->id" ? 'selected':''}}>{{$branch->name}}</option>
-                      @endforeach
+                    <select id="role" name="role" class="form-control modelView checkAdmin" selected="selected" required>
+                      <option value="user">User</option>
+                      <option value="super_user">Super User</option>
+                      <option value="admin">Admin</option>
                     </select>
                   </div>
                 </div>
@@ -273,14 +273,14 @@
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <label>Role</label>
+                <div class="col-md-3 hideBranch">
+                  <label>Branch</label>
                   <div class="form-group">
-                    <select id="role" name="role" class="form-control modelView" selected="selected" required>
-                      <option value="user" >User</option>
-                      <option value="super_user">Super User</option>
-                      <option value="admin">Admin</option>
-
+                    <select id="branch" name="branch_id" class="form-control modelView " required>
+                    <option value="">Select</option>
+                      @foreach($branches as $branch )
+                      <option value="{{$branch->id}}" >{{$branch->name}}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
@@ -306,7 +306,7 @@
       $('#Id').val('Auto')
       $('.update').text("Add User")
       $('#viewModal').modal('show')
-
+      $('.modelView').val('');
       $('#form').attr('action', "/user");
 
       $('#submit_button').click(function() {
@@ -374,7 +374,17 @@
 
     });
 
-
+    $(".checkAdmin").on('change',function() {
+      if($(this).val() == 'admin'){
+        $('.hideBranch').val('');
+        $('.hideBranch').hide();
+        $('#branch').attr('required', false); 
+        // $('.branch').removeAttr('required');​​​​​
+      }else{
+        $('.hideBranch').show();
+        $('#branch').attr('required', true); 
+      }
+    });
 
   });
 </script>
