@@ -76,7 +76,7 @@ class SingleOrderController extends Controller
                 'created_user_name' => $created_user_name,
                 'address' => $singleOrder->address,
                 'working_status' =>  $singleOrder->working_status,
-                'requested_branch_name' =>   '',
+                'requested_branch_name' => '',
                 'approved_branch_name' => '',
                 'requested_user_name' => '',
                 'approved_user_name' =>'',

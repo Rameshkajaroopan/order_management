@@ -79,14 +79,27 @@ class DashboardController extends Controller
 
         $totalIncomeToday = Order::where('created_branch_id', '=', $branchId)
             ->whereDate('created_date', Carbon::now()->toDateString())
-            ->where('working_status','!=','Cancel')
+            ->where('working_status', '!=', 'Cancel')
             ->sum('total_amount');
 
         $totalPaidToday = Order::where('created_branch_id', '=', $branchId)
             ->where('working_status', '=', 'NotStart')
             ->whereDate('created_date', Carbon::now()->toDateString())
-            ->where('working_status','!=','Cancel')
+            ->where('working_status', '!=', 'Cancel')
             ->sum('paid_amount');
+
+        $totalCashToday = Order::where('created_branch_id', '=', $branchId)
+            ->whereDate('created_date', Carbon::now()->toDateString())
+            ->where('working_status', '!=', 'Cancel')
+            ->where('payment_mode', '=', 'Cash')
+            ->count();
+
+        $totalCardToday = Order::where('created_branch_id', '=', $branchId)
+            ->whereDate('created_date', Carbon::now()->toDateString())
+            ->where('working_status', '!=', 'Cancel')
+            ->where('payment_mode', '=', 'Card')
+            ->count();    
+
 
         return response()->json([
             'NewCount' => $NewCount,
@@ -94,11 +107,10 @@ class DashboardController extends Controller
             'notificationOrder' => $notificationOrder,
             'receivedCount' => $receivedCount,
             'totalCount' => $totalCount,
-            'NewCountToday' => $NewCountToday,
-            'sentCountToday' => $sentCountToday,
-            'receivedCountToday' => $receivedCountToday,
             'totalIncomeToday' => $totalIncomeToday,
-            'totalPaidToday' => $totalPaidToday
+            'totalPaidToday' => $totalPaidToday,
+            'totalCashToday' => $totalCashToday,
+            'totalCardToday' => $totalCardToday
         ]);
     }
 
