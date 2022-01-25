@@ -24,7 +24,7 @@ class ButtonClickController extends Controller
         $OrderTransfer->approved_branch_id  = $request->approved_branch_id;
         $OrderTransfer->requested_date =  Carbon::now()->toDateTimeString();
         $OrderTransfer->requested_user_id  =  Auth::user()->id;
-        $OrderTransfer->current_location  =  "InTransit";
+        $OrderTransfer->location_status =  "InTransit";
         $OrderTransfer->request_status  =  "NotApproved";
         $OrderTransfer->save();
         Order::where('serial_number', $request->serial_number)->update([

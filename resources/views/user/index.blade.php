@@ -175,8 +175,6 @@
             <td data-th="User Name">{{$user->user_name}}</td>
             <td data-th="Email">{{$user->email}}</td>
             <td data-th="Phone">{{$user->mobile}}</td>
-
-
             <td data-th="Branch">{{$user->name}}</td>
             <td data-th="Role">{{$user->role}}</td>
 
@@ -289,7 +287,6 @@
 
               <button id="submit_button" class="btn btn-light update float-right ml-2" type="submit">Update</button>
               <button type="button" class="btn btn-primary float-right view_button" onclick="$('#viewModal').modal('hide') ;$('.modelView').val('') ">Cancel</button>
-
 
             </div>
       </form>
