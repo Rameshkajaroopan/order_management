@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'first_name' => 'kopi',
+            'last_name' => 'kopi',
             'role' =>'user',
             'mobile' =>Str::random(10),
             'user_name' => 'kopi',
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'first_name' => 'thusapan',
+            'last_name' => 'thusapan',
             'role' =>'user',
             'mobile' =>Str::random(10),
             'email' => 'thusapan@gmail.com',
@@ -38,6 +40,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'first_name' => 'kalai',
+            'last_name' => 'kalai',
             'role' =>'user',
             'mobile' =>Str::random(10),
             'email' => 'kalai@gmail.com',
@@ -48,6 +51,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'first_name' => 'nilavan',
+            'last_name' => 'nilavan',
             'role' =>'user',
             'mobile' =>Str::random(10),
             'email' => 'nilavan@gmail.com',
@@ -57,7 +61,8 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'first_name' => 'mayuran',
+            'first_name' => 'nilavan',
+            'last_name' => 'nilavan',
             'role' =>'user',
             'mobile' =>Str::random(10),
             'email' => 'mayuran@gmail.com',
@@ -68,6 +73,7 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'first_name' => 'kajan',
+            'last_name' => 'ramesh',
             'role' =>'user',
             'mobile' =>Str::random(10),
             'email' => 'kajan@gmail.com',
@@ -77,6 +83,7 @@ class UserSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'first_name' => 'admin',
+            'last_name' => 'kalai',
             'role' =>'admin',
             'mobile' =>Str::random(10),
             'email' => 'kajan@gmail.com',

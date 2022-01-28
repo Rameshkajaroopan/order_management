@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('created_user_id')->unsigned();
             $table->foreign('created_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('current_location');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('img')->nullable();
             $table->string('working_status');
             $table->string('description')->nullable();

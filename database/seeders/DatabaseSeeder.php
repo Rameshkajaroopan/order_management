@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             branchSeeder::class,
             UserSeeder::class,
             OrderSeeder::class,
-            OrderTransferSeeder::class 
+            OrdertransferSeeder::class 
         ]);
     }
 }

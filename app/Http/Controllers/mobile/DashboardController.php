@@ -116,7 +116,15 @@ class DashboardController extends Controller
 
     public function profile()
     {
-        $loginUser = Auth::user();
+        // $loginUser = Auth::user();
+        $userId = Auth::user()->id;
+
+        $loginUser = User::join('branches','branches.id','=','users.branch_id')
+        ->join('locations','locations.id','=','branches.location_id')
+        ->where('users.id',$userId)
+        ->select('users.first_name as username','branches.name as branchname','locations.name as locationname','users.role as role')
+        ->get();
+        
         return response()->json(['loginUser' => $loginUser]);
     }
 }
