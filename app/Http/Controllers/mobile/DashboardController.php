@@ -121,9 +121,9 @@ class DashboardController extends Controller
 
         $loginUser = User::join('branches','branches.id','=','users.branch_id')
         ->join('locations','locations.id','=','branches.location_id')
-        ->where('users.id',$userId)
+        ->where('users.id', $userId)
         ->select('users.first_name as username','branches.name as branchname','locations.name as locationname','users.role as role')
-        ->get();
+        ->first();
         
         return response()->json(['loginUser' => $loginUser]);
     }

@@ -53,6 +53,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/stuckOrderRequest',  'App\Http\Controllers\mobile\ButtonClickController@stuckOrderRequest');
     Route::get('/orderSearch',  'App\Http\Controllers\mobile\ButtonClickController@orderSearch');
     Route::post('/completedButton',  'App\Http\Controllers\mobile\ButtonClickController@completedButton');
- 
     Route::get('/logout',  'App\Http\Controllers\mobile\LoginController@logout');
 });
