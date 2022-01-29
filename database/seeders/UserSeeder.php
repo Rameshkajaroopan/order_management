@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'first_name' => 'nilavan',
             'last_name' => 'nilavan',
-            'role' =>'user',
+            'role' =>'super_user',
             'mobile' =>Str::random(10),
             'email' => 'mayuran@gmail.com',
             'branch_id' => 2,
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'first_name' => 'kajan',
             'last_name' => 'ramesh',
-            'role' =>'user',
+            'role' =>'super_user',
             'mobile' =>Str::random(10),
             'email' => 'kajan@gmail.com',
             'branch_id' => 1,
